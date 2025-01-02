@@ -33,7 +33,10 @@ android {
 }
 
 dependencies {
+    api ("cn.entertech.android:biomoduleble:2.4.1-debug")
+    api("cn.entertech.android:log-api:1.0.9-local")
 
+    implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
