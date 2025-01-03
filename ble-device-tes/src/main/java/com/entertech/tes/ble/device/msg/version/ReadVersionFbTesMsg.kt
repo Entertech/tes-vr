@@ -11,6 +11,21 @@ class ReadVersionFbTesMsg : BaseReceiveTesMsg(), IVersionFunction {
         Regex("V(\\d+)")
     }
 
+    /**
+     * 硬件版本号
+     * */
+    var hardwareVersion: String = ""
+
+    /**
+     * 软件版本号
+     * */
+    var softwareVersion: String = ""
+
+    /**
+     * 协议版本号
+     * */
+    var protocolVersion: String = ""
+
     override fun getMsgLength(): Byte {
         return 0x14
     }
@@ -21,7 +36,14 @@ class ReadVersionFbTesMsg : BaseReceiveTesMsg(), IVersionFunction {
         // 转换为字符串
         val stringData = relevantBytes.toString(Charsets.UTF_8)
         //：硬件版本号-软件版本号-协议版本号
-        regex.findAll(stringData).map { it.groupValues[1] }.toList()
+        regex.findAll(stringData).map { it.groupValues[1] }.toList().forEach {
+            when {
+                hardwareVersion.isEmpty() -> hardwareVersion = it
+                softwareVersion.isEmpty() -> softwareVersion = it
+                protocolVersion.isEmpty() -> protocolVersion = it
+            }
+        }
+
         return true
     }
 

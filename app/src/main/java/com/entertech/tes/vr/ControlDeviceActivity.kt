@@ -8,7 +8,7 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.entertech.tes.ble.TesVrLog
-import com.entertech.tes.ble.device.msg.shakehand.ShakeHandsTesMsg
+import com.entertech.tes.ble.device.msg.version.ReadVersionTesMsg
 
 
 class ControlDeviceActivity : AppCompatActivity(), OnClickListener {
@@ -65,7 +65,7 @@ class ControlDeviceActivity : AppCompatActivity(), OnClickListener {
             }
 
             R.id.btnReadVersion -> {
-
+                mControlDeviceViewModel.sendMessage(ReadVersionTesMsg(),intent)
             }
 
             R.id.btnUp -> {

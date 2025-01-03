@@ -11,8 +11,4 @@ class ReadVersionTesMsg : BaseSendTesMsg(), IVersionFunction {
     override fun createDataBytes(byteArray: ByteArray) {
 
     }
-
-    override fun getCommandByte(): Byte {
-        return super.getCommandByte()
-    }
 }

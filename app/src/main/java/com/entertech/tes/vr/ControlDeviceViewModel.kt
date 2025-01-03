@@ -18,6 +18,7 @@ import com.entertech.tes.ble.device.msg.AnalysisTesMsgTool
 import com.entertech.tes.ble.device.msg.BaseSendTesMsg
 import com.entertech.tes.ble.device.msg.shakehand.ShakeHandsFbTesMsg
 import com.entertech.tes.ble.device.msg.shakehand.ShakeHandsTesMsg
+import com.entertech.tes.ble.device.msg.version.ReadVersionFbTesMsg
 import com.entertech.tes.vr.MainActivity.Companion.DEVICE_TO_PHONE_UUID
 import com.entertech.tes.vr.MainActivity.Companion.PHONE_TO_DEVICE_UUID
 import kotlinx.coroutines.Dispatchers
@@ -72,7 +73,7 @@ class ControlDeviceViewModel : ViewModel() {
         }
     }
 
-    private fun sendMessage(msg: BaseSendTesMsg, intent: Intent) {
+    fun sendMessage(msg: BaseSendTesMsg, intent: Intent) {
         if (bluetoothCharacteristic?.uid.isNullOrEmpty()) {
             bluetoothCharacteristic = BluetoothCharacteristic(
                 intent.getStringExtra(PHONE_TO_DEVICE_UUID) ?: "", listOf(
@@ -140,42 +141,53 @@ class ControlDeviceViewModel : ViewModel() {
     }
 
     fun connectDevice(intent: Intent) {
-        tesDeviceManager.connectDevice(
-            {
-                TesVrLog.d(TAG, "connect mac :$it")
-                val deviceToPhoneUUid = intent.getStringExtra(DEVICE_TO_PHONE_UUID) ?: ""
+        tesDeviceManager.connectDevice({
+            TesVrLog.d(TAG, "connect mac :$it")
+            val deviceToPhoneUUid = intent.getStringExtra(DEVICE_TO_PHONE_UUID) ?: ""
 
-                tesDeviceManager.notify(BluetoothCharacteristic(
-                    deviceToPhoneUUid, listOf(
-                        BluetoothProperty.BLUETOOTH_PROPERTY_NOTIFY
-                    )
-                ), { notifyData ->
-                    TesVrLog.d(TAG, "notify data :${notifyData.contentToString()}")
-                    when (val msg = AnalysisTesMsgTool.processMsg(notifyData)) {
-                        is ShakeHandsFbTesMsg -> {
-                            val newDeviceStatus = msg.deviceStatus
-                            val newDeviceBattery = msg.deviceBattery
-                            val newRng = msg.rng
-                            TesVrLog.d(TAG, "设备状态 $newDeviceStatus 设备电量 $newDeviceBattery 设备rng ${byteToHex(newRng)}")
+            tesDeviceManager.notify(BluetoothCharacteristic(
+                deviceToPhoneUUid, listOf(
+                    BluetoothProperty.BLUETOOTH_PROPERTY_NOTIFY
+                )
+            ), { notifyData ->
+                TesVrLog.d(TAG, "notify data :${notifyData.contentToString()}")
+                when (val msg = AnalysisTesMsgTool.processMsg(notifyData)) {
+                    is ShakeHandsFbTesMsg -> {
+                        val newDeviceStatus = msg.deviceStatus
+                        val newDeviceBattery = msg.deviceBattery
+                        val newRng = msg.rng
+                        TesVrLog.d(
+                            TAG,
+                            "设备状态 $newDeviceStatus 设备电量 $newDeviceBattery 设备rng ${
+                                byteToHex(newRng)
+                            }"
+                        )
 
-                            viewModelScope.launch(Dispatchers.Main) {
-                                if (newDeviceStatus != tesDeviceManager.deviceStatus) {
-                                    tesDeviceManager.deviceStatus = newDeviceStatus
-                                    shakeHands(intent)
-                                }
-                                tesDeviceManager.battery = newDeviceBattery
-
+                        viewModelScope.launch(Dispatchers.Main) {
+                            if (newDeviceStatus != tesDeviceManager.deviceStatus) {
+                                tesDeviceManager.deviceStatus = newDeviceStatus
+                                shakeHands(intent)
                             }
+                            tesDeviceManager.battery = newDeviceBattery
 
                         }
+
                     }
 
+                    is ReadVersionFbTesMsg -> {
+                        TesVrLog.d(
+                            TAG,
+                            "硬件版本号：${msg.hardwareVersion} 软件版本号：${msg.softwareVersion} 协议版本号： ${msg.protocolVersion}"
+                        )
+                    }
+                }
 
-                }, { errMsg ->
-                    TesVrLog.d(TAG, "notify data error $errMsg")
-                })
 
-            },
+            }, { errMsg ->
+                TesVrLog.d(TAG, "notify data error $errMsg")
+            })
+
+        },
             {
                 TesVrLog.d(TAG, "connect failure :$it")
             },
