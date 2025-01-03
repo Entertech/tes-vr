@@ -17,6 +17,7 @@ import com.entertech.tes.ble.device.msg.current.IRegulationCurrentFunction
 import com.entertech.tes.ble.device.msg.current.RegulationCurrentTesMsg
 import com.entertech.tes.ble.device.msg.current.RegulationCurrentTesMsg.Companion.REGULATION_CURRENT_INCREASE
 import com.entertech.tes.ble.device.msg.current.RegulationCurrentTesMsg.Companion.REGULATION_CURRENT_REDUCE
+import com.entertech.tes.ble.device.msg.rename.RenameTesMsg
 import com.entertech.tes.ble.device.msg.version.ReadVersionTesMsg
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -43,6 +44,7 @@ class ControlDeviceActivity : AppCompatActivity(), OnClickListener {
     private var btnReadVersion: Button? = null
     private var etCurrent: EditText? = null
     private var btnReduceCurrent: EditText? = null
+    private var etNewDeviceName: EditText? = null
     private var btnSetArgAndStart: Button? = null
     private var tvDeviceInfo: TextView? = null
     private var btnUp: Button? = null
@@ -60,7 +62,8 @@ class ControlDeviceActivity : AppCompatActivity(), OnClickListener {
         btnRename = findViewById(R.id.btnRename)
         etCurrent = findViewById(R.id.etCurrent)
         btnReduceCurrent = findViewById(R.id.btnReduceCurrent)
-        btnIncreaseCurrent = findViewById(R.id.etCurrent)
+        btnIncreaseCurrent = findViewById(R.id.btnIncreaseCurrent)
+        etNewDeviceName = findViewById(R.id.etNewDeviceName)
         tvReceiveMsg = findViewById(R.id.tvReceiveMsg)
         tvDeviceInfo = findViewById(R.id.tvDeviceInfo)
         btnReadVersion = findViewById(R.id.btnReadVersion)
@@ -160,11 +163,12 @@ class ControlDeviceActivity : AppCompatActivity(), OnClickListener {
             }
 
             R.id.btnUpload -> {
-                //发送控制命令
+
             }
 
             R.id.btnRename -> {
-
+                //重命名
+                mControlDeviceViewModel.sendMessage(RenameTesMsg(etNewDeviceName?.text.toString().toByteArray()), intent)
             }
 
             R.id.btnReadVersion -> {
