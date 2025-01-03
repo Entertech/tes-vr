@@ -2,7 +2,7 @@ package com.entertech.tes.ble.device.msg.control
 
 import com.entertech.tes.ble.device.msg.BaseSendTesMsg
 
-class ControlCommandTesMsg : BaseSendTesMsg(),IControlCommandFunction {
+class ControlCommandTesMsg(private val controlCommand:Byte) : BaseSendTesMsg(),IControlCommandFunction {
 
     companion object {
         const val INDEX_CONTROL_COMMAND = 0
@@ -14,7 +14,7 @@ class ControlCommandTesMsg : BaseSendTesMsg(),IControlCommandFunction {
     }
 
     override fun createDataBytes(byteArray: ByteArray) {
-
+        byteArray[INDEX_DATA_START + INDEX_CONTROL_COMMAND] = controlCommand
     }
 
     override fun getMsgLength(): Byte {

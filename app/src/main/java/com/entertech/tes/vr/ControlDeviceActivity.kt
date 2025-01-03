@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.entertech.tes.ble.TesVrLog
+import com.entertech.tes.ble.device.msg.control.ControlCommandTesMsg
 import com.entertech.tes.ble.device.msg.version.ReadVersionTesMsg
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -25,9 +26,13 @@ class ControlDeviceActivity : AppCompatActivity(), OnClickListener {
         ViewModelProvider(this)[ControlDeviceViewModel::class.java]
     }
 
+    private var btnDeviceStart: Button? = null
+    private var btnDeviceStop: Button? = null
+    private var btnDeviceDisconnect: Button? = null
+    private var btnDevicePowerOff: Button? = null
 
     private var btnShakeHand: Button? = null
-    private var btnSendControlCommand: Button? = null
+    private var btnUpload: Button? = null
     private var btnRename: Button? = null
     private var btnReadVersion: Button? = null
     private var btnSetArgAndStart: Button? = null
@@ -39,16 +44,22 @@ class ControlDeviceActivity : AppCompatActivity(), OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_control_device)
         btnShakeHand = findViewById(R.id.btnShakeHand)
-        btnSendControlCommand = findViewById(R.id.btnSendControlCommand)
+        btnDeviceStart = findViewById(R.id.btnDeviceStart)
+        btnDeviceStop = findViewById(R.id.btnDeviceStop)
+        btnDeviceDisconnect = findViewById(R.id.btnDeviceDisconnect)
+        btnDevicePowerOff = findViewById(R.id.btnDevicePowerOff)
+        btnUpload = findViewById(R.id.btnUpload)
         btnRename = findViewById(R.id.btnRename)
         tvReceiveMsg = findViewById(R.id.tvReceiveMsg)
         tvDeviceInfo = findViewById(R.id.tvDeviceInfo)
         btnReadVersion = findViewById(R.id.btnReadVersion)
         btnSetArgAndStart = findViewById(R.id.btnSetArgAndStart)
-        btnUp = findViewById(R.id.btnUp)
-        btnDown = findViewById(R.id.btnDown)
         btnShakeHand?.setOnClickListener(this)
-        btnSendControlCommand?.setOnClickListener(this)
+        btnDeviceStart?.setOnClickListener(this)
+        btnDevicePowerOff?.setOnClickListener(this)
+        btnDeviceDisconnect?.setOnClickListener(this)
+        btnDeviceStop?.setOnClickListener(this)
+        btnUpload?.setOnClickListener(this)
         btnRename?.setOnClickListener(this)
         btnReadVersion?.setOnClickListener(this)
         btnUp?.setOnClickListener(this)
@@ -93,7 +104,31 @@ class ControlDeviceActivity : AppCompatActivity(), OnClickListener {
                 mControlDeviceViewModel.shakeHands(intent)
             }
 
-            R.id.btnSendControlCommand -> {
+            R.id.btnDeviceStart -> {
+                mControlDeviceViewModel.sendMessage(
+                    ControlCommandTesMsg(ControlCommandTesMsg.CONTROL_COMMAND_START), intent
+                )
+            }
+
+            R.id.btnDeviceStop -> {
+                mControlDeviceViewModel.sendMessage(
+                    ControlCommandTesMsg(ControlCommandTesMsg.CONTROL_COMMAND_STOP), intent
+                )
+            }
+
+            R.id.btnDeviceDisconnect -> {
+                mControlDeviceViewModel.sendMessage(
+                    ControlCommandTesMsg(ControlCommandTesMsg.CONTROL_COMMAND_DISCONNECT), intent
+                )
+            }
+
+            R.id.btnDevicePowerOff -> {
+                mControlDeviceViewModel.sendMessage(
+                    ControlCommandTesMsg(ControlCommandTesMsg.CONTROL_COMMAND_POWER_OFF), intent
+                )
+            }
+
+            R.id.btnUpload -> {
                 //发送控制命令
             }
 
@@ -103,14 +138,6 @@ class ControlDeviceActivity : AppCompatActivity(), OnClickListener {
 
             R.id.btnReadVersion -> {
                 mControlDeviceViewModel.sendMessage(ReadVersionTesMsg(), intent)
-            }
-
-            R.id.btnUp -> {
-
-            }
-
-            R.id.btnDown -> {
-
             }
 
             R.id.btnSetArgAndStart -> {

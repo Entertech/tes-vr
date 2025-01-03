@@ -22,119 +22,99 @@
         android:layout_margin="10dp"
         android:text="接受到的消息: "
         app:layout_constraintTop_toBottomOf="@id/tvDeviceInfo" />
-    <Button
-        android:id="@+id/btnDown"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="16dp"
-        android:text="down"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/btnLeft"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginVertical="16dp"
-        app:layout_constraintBottom_toTopOf="@id/btnDown"
-        app:layout_constraintEnd_toStartOf="@id/btnMiddle"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/btnMiddle"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@id/btnLeft"
-        app:layout_constraintEnd_toStartOf="@id/btnRight"
-        app:layout_constraintStart_toEndOf="@id/btnLeft"
-        app:layout_constraintTop_toTopOf="@id/btnLeft" />
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-    <Button
-        android:id="@+id/btnRight"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        app:layout_constraintBottom_toBottomOf="@id/btnLeft"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/btnMiddle"
-        app:layout_constraintTop_toTopOf="@id/btnLeft" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/btnUp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="16dp"
-        android:text="Up"
-        app:layout_constraintBottom_toTopOf="@id/btnMiddle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+            <Button
+                android:id="@+id/btnDeviceStart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="设备启动" />
 
-    <Button
-        android:id="@+id/btnRename"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginVertical="16dp"
-        android:text="改名"
-        app:layout_constraintBottom_toTopOf="@id/btnUp"
-        app:layout_constraintEnd_toStartOf="@id/btnCurrent"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent" />
+            <Button
+                android:id="@+id/btnDeviceStop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="设备停止" />
 
-    <Button
-        android:id="@+id/btnCurrent"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="电流调节"
-        app:layout_constraintBottom_toBottomOf="@id/btnRename"
-        app:layout_constraintEnd_toStartOf="@id/btnReadVersion"
-        app:layout_constraintStart_toEndOf="@id/btnRename"
-        app:layout_constraintTop_toTopOf="@id/btnRename" />
+            <Button
+                android:id="@+id/btnDeviceDisconnect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="断开连接" />
 
-    <Button
-        android:id="@+id/btnReadVersion"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:text="读取版本"
-        app:layout_constraintBottom_toBottomOf="@id/btnRename"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/btnCurrent"
-        app:layout_constraintTop_toTopOf="@id/btnRename" />
+            <Button
+                android:id="@+id/btnDevicePowerOff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="关机" />
+        </LinearLayout>
 
-    <Button
-        android:id="@+id/btnShakeHand"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginVertical="16dp"
-        android:text="握手"
-        app:layout_constraintBottom_toTopOf="@id/btnRename"
-        app:layout_constraintEnd_toStartOf="@id/btnSetArgAndStart"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/btnSetArgAndStart"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="设置参数并启动"
-        app:layout_constraintBottom_toBottomOf="@id/btnShakeHand"
-        app:layout_constraintEnd_toStartOf="@id/btnReadVersion"
-        app:layout_constraintStart_toEndOf="@id/btnShakeHand"
-        app:layout_constraintTop_toTopOf="@id/btnShakeHand" />
+            <Button
+                android:id="@+id/btnShakeHand"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="握手" />
 
-    <Button
-        android:id="@+id/btnSendControlCommand"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:text="发送控制命令"
-        app:layout_constraintBottom_toBottomOf="@id/btnShakeHand"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/btnSetArgAndStart"
-        app:layout_constraintTop_toTopOf="@id/btnShakeHand" />
+            <Button
+                android:id="@+id/btnSetArgAndStart"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="设置参数并启动" />
+
+            <Button
+                android:id="@+id/btnUpload"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="事件上报" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnRename"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="改名" />
+
+            <Button
+                android:id="@+id/btnCurrent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="电流调节" />
+
+            <Button
+                android:id="@+id/btnReadVersion"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="读取版本" />
+        </LinearLayout>
+    </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
