@@ -36,7 +36,10 @@ android {
 }
 
 dependencies {
-
+    implementation(libs.kotlinx.coroutines.core) // 替换为最新版本
+    implementation(libs.org.jetbrains.kotlinx.kotlinx.coroutines.android) // 替换为最新版本
+    implementation(libs.androidx.lifecycle.lifecycle.viewmodel.ktx) // 替换为最新版本
+    implementation(libs.androidx.lifecycle.lifecycle.runtime.ktx)  // 替换为最新版本
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

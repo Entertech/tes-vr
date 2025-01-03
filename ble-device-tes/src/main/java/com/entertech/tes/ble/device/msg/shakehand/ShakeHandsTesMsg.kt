@@ -11,12 +11,18 @@ class ShakeHandsTesMsg : BaseSendTesMsg(), IShakeHandFunction {
         const val INDEX_RNG = 0
     }
 
+    var rng: Byte? = null
+
     override fun getMsgLength(): Byte {
         return 0x07
     }
 
     override fun createDataBytes(byteArray: ByteArray) {
-        byteArray[INDEX_DATA_START + INDEX_RNG] = generateRandomByte()
+        rng = generateRandomByte()
+        rng?.apply {
+            byteArray[INDEX_DATA_START + INDEX_RNG] = this
+        }
+
     }
 
     private fun generateRandomByte(): Byte {

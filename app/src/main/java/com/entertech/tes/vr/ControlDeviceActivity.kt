@@ -53,7 +53,7 @@ class ControlDeviceActivity : AppCompatActivity(), OnClickListener {
         when (v?.id) {
             R.id.btnShakeHand -> {
                 //握手
-                mControlDeviceViewModel.sendMessage(ShakeHandsTesMsg(), intent)
+                mControlDeviceViewModel.shakeHands(intent)
             }
 
             R.id.btnStop -> {

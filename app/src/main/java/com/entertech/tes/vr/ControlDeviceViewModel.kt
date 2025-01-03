@@ -7,26 +7,38 @@ import android.content.pm.PackageManager
 import android.os.Build
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import cn.entertech.ble.api.ConnectionBleStrategy
 import cn.entertech.ble.uid.characteristic.BluetoothCharacteristic
 import cn.entertech.ble.uid.property.BluetoothProperty
 import com.entertech.tes.ble.TesVrLog
+import com.entertech.tes.ble.device.DeviceStatus
 import com.entertech.tes.ble.device.TesDeviceManager
 import com.entertech.tes.ble.device.msg.AnalysisTesMsgTool
 import com.entertech.tes.ble.device.msg.BaseSendTesMsg
+import com.entertech.tes.ble.device.msg.shakehand.ShakeHandsFbTesMsg
+import com.entertech.tes.ble.device.msg.shakehand.ShakeHandsTesMsg
 import com.entertech.tes.vr.MainActivity.Companion.DEVICE_TO_PHONE_UUID
 import com.entertech.tes.vr.MainActivity.Companion.PHONE_TO_DEVICE_UUID
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.launch
 
 class ControlDeviceViewModel : ViewModel() {
     companion object {
         private const val TAG = "ControlDeviceViewModel"
     }
 
+    private var shakeHandJob: Job? = null
+
     private var bluetoothCharacteristic: BluetoothCharacteristic? = null
 
     private val tesDeviceManager by lazy {
         TesDeviceManager(context = TesVrApp.instance)
     }
+    private var shakeHandsTesMsg: ShakeHandsTesMsg? = null
 
     fun initPermission(activity: Activity, allPermissionGranted: () -> Unit) {
         val needPermission = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
@@ -60,7 +72,7 @@ class ControlDeviceViewModel : ViewModel() {
         }
     }
 
-    fun sendMessage(msg: BaseSendTesMsg, intent: Intent) {
+    private fun sendMessage(msg: BaseSendTesMsg, intent: Intent) {
         if (bluetoothCharacteristic?.uid.isNullOrEmpty()) {
             bluetoothCharacteristic = BluetoothCharacteristic(
                 intent.getStringExtra(PHONE_TO_DEVICE_UUID) ?: "", listOf(
@@ -77,6 +89,56 @@ class ControlDeviceViewModel : ViewModel() {
         }
     }
 
+    fun shakeHands(intent: Intent) {
+        shakeHandJob?.cancel()
+        if (tesDeviceManager.deviceStatus == DeviceStatus.DEVICE_STATUS_RUNNING) {
+            TesVrLog.d(TAG, "设备处于运行中  不用发送握手包")
+            return
+        }
+        val repeatCount: Int
+        val msgDelay: Long
+        when (tesDeviceManager.deviceStatus) {
+            DeviceStatus.DEVICE_STATUS_READY -> {
+                repeatCount = Int.MAX_VALUE
+                msgDelay = 3000L
+            }
+
+            null -> {
+                repeatCount = 3
+                msgDelay = 1000L
+            }
+
+            else -> {
+                repeatCount = 0
+                msgDelay = 0L
+            }
+        }
+        TesVrLog.d(TAG, "需要发送握手包的次数 $repeatCount")
+        if (repeatCount <= 0) {
+            return
+        }
+        shakeHandJob = viewModelScope.launch {
+            repeat(repeatCount) {
+                if (tesDeviceManager.deviceStatus == DeviceStatus.DEVICE_STATUS_RUNNING) {
+                    shakeHandJob?.cancel()
+                    TesVrLog.d(TAG, "设备处于运行中  不用发送握手包")
+                    return@launch
+                }
+                if (!isActive) {
+                    TesVrLog.d(TAG, "shakeHands job is cancel")
+                    return@launch
+                }
+                if (shakeHandsTesMsg == null) {
+                    shakeHandsTesMsg = ShakeHandsTesMsg()
+                }
+                shakeHandsTesMsg?.apply {
+                    sendMessage(this, intent)
+                }
+                delay(msgDelay)
+            }
+        }
+    }
+
     fun connectDevice(intent: Intent) {
         tesDeviceManager.connectDevice(
             {
@@ -89,7 +151,25 @@ class ControlDeviceViewModel : ViewModel() {
                     )
                 ), { notifyData ->
                     TesVrLog.d(TAG, "notify data :${notifyData.contentToString()}")
-                    val msg = AnalysisTesMsgTool.processMsg(notifyData)
+                    when (val msg = AnalysisTesMsgTool.processMsg(notifyData)) {
+                        is ShakeHandsFbTesMsg -> {
+                            val newDeviceStatus = msg.deviceStatus
+                            val newDeviceBattery = msg.deviceBattery
+                            val newRng = msg.rng
+                            TesVrLog.d(TAG, "设备状态 $newDeviceStatus 设备电量 $newDeviceBattery 设备rng ${byteToHex(newRng)}")
+
+                            viewModelScope.launch(Dispatchers.Main) {
+                                if (newDeviceStatus != tesDeviceManager.deviceStatus) {
+                                    tesDeviceManager.deviceStatus = newDeviceStatus
+                                    shakeHands(intent)
+                                }
+                                tesDeviceManager.battery = newDeviceBattery
+
+                            }
+
+                        }
+                    }
+
 
                 }, { errMsg ->
                     TesVrLog.d(TAG, "notify data error $errMsg")
@@ -102,5 +182,12 @@ class ControlDeviceViewModel : ViewModel() {
             connectionBleStrategy = ConnectionBleStrategy.CONNECT_DEVICE_MAC,
             mac = "D4:AD:20:74:75:FC"
         )
+    }
+
+    fun byteToHex(byte: Byte?): String {
+        if (byte == null) {
+            return "null"
+        }
+        return "0x" + String.format("%02X", byte)
     }
 }
