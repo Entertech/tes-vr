@@ -75,6 +75,7 @@ object AnalysisTesMsgTool {
             }
 
             else -> {
+                TesVrLog.e(TAG, "未知命令 $cmd")
                 null
             }
         }

@@ -38,7 +38,6 @@ android {
 dependencies {
 
     implementation(libs.androidx.core.ktx)
-    implementation("cn.entertech.android:base:0.0.9-vr-control")
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.activity)

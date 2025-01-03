@@ -1,19 +1,15 @@
 package com.entertech.tes.vr
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import cn.entertech.base.BaseActivity
-import cn.entertech.base.util.startActivity
 
-class MainActivity : BaseActivity() {
+class MainActivity : AppCompatActivity(), View.OnClickListener {
     companion object {
         const val SERVICE_UUID = "serviceUuid"
         const val DEVICE_TO_PHONE_UUID = "deviceToPhoneUUid"
@@ -90,11 +86,11 @@ class MainActivity : BaseActivity() {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.btnOK -> {
-                val bundle = Bundle()
-                bundle.putString(SERVICE_UUID, serviceUuid)
-                bundle.putString(DEVICE_TO_PHONE_UUID, deviceToPhoneUUid)
-                bundle.putString(PHONE_TO_DEVICE_UUID, phoneToDeviceUUid)
-                startActivity(ControlDeviceActivity::class.java, bundle, false)
+                val intent = Intent(this, ControlDeviceActivity::class.java)
+                intent.putExtra(SERVICE_UUID, serviceUuid)
+                intent.putExtra(DEVICE_TO_PHONE_UUID, deviceToPhoneUUid)
+                intent.putExtra(PHONE_TO_DEVICE_UUID, phoneToDeviceUUid)
+                startActivity(intent)
             }
         }
     }
