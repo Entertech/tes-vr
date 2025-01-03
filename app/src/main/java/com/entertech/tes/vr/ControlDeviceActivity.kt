@@ -168,7 +168,11 @@ class ControlDeviceActivity : AppCompatActivity(), OnClickListener {
 
             R.id.btnRename -> {
                 //重命名
-                mControlDeviceViewModel.sendMessage(RenameTesMsg(etNewDeviceName?.text.toString().toByteArray()), intent)
+                mControlDeviceViewModel.sendMessage(
+                    RenameTesMsg(
+                        etNewDeviceName?.text.toString().toByteArray()
+                    ), intent
+                )
             }
 
             R.id.btnReadVersion -> {
