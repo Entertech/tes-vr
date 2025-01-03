@@ -36,14 +36,13 @@ class ReadVersionFbTesMsg : BaseReceiveTesMsg(), IVersionFunction {
         // 转换为字符串
         val stringData = relevantBytes.toString(Charsets.UTF_8)
         //：硬件版本号-软件版本号-协议版本号
-        regex.findAll(stringData).map { it.groupValues[1] }.toList().forEach {
-            when {
-                hardwareVersion.isEmpty() -> hardwareVersion = it
-                softwareVersion.isEmpty() -> softwareVersion = it
-                protocolVersion.isEmpty() -> protocolVersion = it
+        regex.findAll(stringData).map { it.groupValues[1] }.toList().forEachIndexed { index, version ->
+            when(index) {
+                0 -> hardwareVersion = version
+                1 -> softwareVersion = version
+                2 -> protocolVersion = version
             }
         }
-
         return true
     }
 
