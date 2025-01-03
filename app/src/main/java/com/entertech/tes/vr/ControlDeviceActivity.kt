@@ -4,6 +4,8 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.view.View
+import android.widget.Button
 import androidx.core.app.ActivityCompat
 import cn.entertech.base.BaseActivity
 import cn.entertech.ble.api.ConnectionBleStrategy
@@ -12,6 +14,7 @@ import cn.entertech.ble.uid.property.BluetoothProperty
 import com.entertech.tes.ble.TesVrLog
 import com.entertech.tes.ble.device.TesDeviceManager
 import com.entertech.tes.ble.device.msg.AnalysisTesMsgTool
+import com.entertech.tes.ble.device.msg.BaseSendTesMsg
 import com.entertech.tes.ble.device.msg.shakehand.ShakeHandsTesMsg
 import com.entertech.tes.vr.MainActivity.Companion.DEVICE_TO_PHONE_UUID
 import com.entertech.tes.vr.MainActivity.Companion.PHONE_TO_DEVICE_UUID
@@ -26,11 +29,79 @@ class ControlDeviceActivity : BaseActivity() {
         TesDeviceManager(context = applicationContext)
     }
 
+    private var btnShakeHand: Button? = null
+    private var btnStop: Button? = null
+    private var btnRename: Button? = null
+    private var btnReadVersion: Button? = null
+    private var btnUp: Button? = null
+    private var btnDown: Button? = null
+    private var bluetoothCharacteristic: BluetoothCharacteristic? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_control_device)
+        btnShakeHand = findViewById(R.id.btnShakeHand)
+        btnStop = findViewById(R.id.btnStop)
+        btnRename = findViewById(R.id.btnRename)
+        btnReadVersion = findViewById(R.id.btnReadVersion)
+        btnUp = findViewById(R.id.btnUp)
+        btnDown = findViewById(R.id.btnDown)
+        btnShakeHand?.setOnClickListener(this)
+        btnStop?.setOnClickListener(this)
+        btnRename?.setOnClickListener(this)
+        btnReadVersion?.setOnClickListener(this)
+        btnUp?.setOnClickListener(this)
+        btnDown?.setOnClickListener(this)
         initPermission()
 
+    }
+
+    private fun sendMessage(msg: BaseSendTesMsg) {
+        if (bluetoothCharacteristic?.uid.isNullOrEmpty()) {
+            bluetoothCharacteristic = BluetoothCharacteristic(
+                intent.getStringExtra(PHONE_TO_DEVICE_UUID) ?: "", listOf(
+                    BluetoothProperty.BLUETOOTH_PROPERTY_WRITE
+                )
+            )
+        }
+        bluetoothCharacteristic?.apply {
+            tesDeviceManager.write(this, bytes = msg.createMsg(), {
+                TesVrLog.d(TAG, "write ShakeHandsTesMsg success")
+            }, { errMsg ->
+                TesVrLog.e(TAG, "write ShakeHandsTesMsg failure :$errMsg")
+            })
+        }
+
+
+    }
+
+    override fun onClick(v: View?) {
+        super.onClick(v)
+        when (v?.id) {
+            R.id.btnShakeHand -> {
+                //握手
+                sendMessage(ShakeHandsTesMsg())
+            }
+
+            R.id.btnStop -> {
+
+            }
+
+            R.id.btnRename -> {
+
+            }
+
+            R.id.btnReadVersion -> {
+
+            }
+
+            R.id.btnUp -> {
+
+            }
+
+            R.id.btnDown -> {
+
+            }
+        }
     }
 
     private fun initPermission() {
@@ -66,34 +137,23 @@ class ControlDeviceActivity : BaseActivity() {
     }
 
     private fun connectDevice() {
-        tesDeviceManager.connectDevice(
-            {
-                TesVrLog.d(TAG, "connect mac :$it")
-                val deviceToPhoneUUid = intent.getStringExtra(DEVICE_TO_PHONE_UUID) ?: ""
-                val phoneToDeviceUUid = intent.getStringExtra(PHONE_TO_DEVICE_UUID) ?: ""
-                tesDeviceManager.notify(BluetoothCharacteristic(
-                    deviceToPhoneUUid, listOf(
-                        BluetoothProperty.BLUETOOTH_PROPERTY_NOTIFY
-                    )
-                ), { notifyData ->
-                    TesVrLog.d(TAG, "notify data :${notifyData.contentToString()}")
-                    val msg = AnalysisTesMsgTool.processMsg(notifyData)
+        tesDeviceManager.connectDevice({
+            TesVrLog.d(TAG, "connect mac :$it")
+            val deviceToPhoneUUid = intent.getStringExtra(DEVICE_TO_PHONE_UUID) ?: ""
 
-                }, { errMsg ->
-                    TesVrLog.d(TAG, "notify data error $errMsg")
-                })
-                //握手
-                val mShakeHandsTesMsg = ShakeHandsTesMsg()
-                tesDeviceManager.write(BluetoothCharacteristic(
-                    phoneToDeviceUUid, listOf(
-                        BluetoothProperty.BLUETOOTH_PROPERTY_WRITE
-                    )
-                ), bytes = mShakeHandsTesMsg.createMsg(), {
-                    TesVrLog.d(TAG, "write ShakeHandsTesMsg success")
-                }, { errMsg ->
-                    TesVrLog.e(TAG, "write ShakeHandsTesMsg failure :$errMsg")
-                })
-            },
+            tesDeviceManager.notify(BluetoothCharacteristic(
+                deviceToPhoneUUid, listOf(
+                    BluetoothProperty.BLUETOOTH_PROPERTY_NOTIFY
+                )
+            ), { notifyData ->
+                TesVrLog.d(TAG, "notify data :${notifyData.contentToString()}")
+                val msg = AnalysisTesMsgTool.processMsg(notifyData)
+
+            }, { errMsg ->
+                TesVrLog.d(TAG, "notify data error $errMsg")
+            })
+
+        },
             {
                 TesVrLog.d(TAG, "connect failure :$it")
             },
@@ -122,12 +182,6 @@ class ControlDeviceActivity : BaseActivity() {
         if (isAllGrant) {
             connectDevice()
         }
-    }
-
-
-    private fun processDeviceMsg(byteArray: ByteArray) {
-
-
     }
 
 

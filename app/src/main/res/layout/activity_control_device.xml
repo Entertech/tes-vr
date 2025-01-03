@@ -7,4 +7,117 @@
     android:layout_height="match_parent"
     tools:context=".ControlDeviceActivity">
 
+    <Button
+        android:id="@+id/btnDown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/d16dp"
+        android:text="down"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnLeft"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/d16dp"
+        android:layout_marginVertical="@dimen/d16dp"
+        app:layout_constraintBottom_toTopOf="@id/btnDown"
+        app:layout_constraintEnd_toStartOf="@id/btnMiddle"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnMiddle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/btnLeft"
+        app:layout_constraintEnd_toStartOf="@id/btnRight"
+        app:layout_constraintStart_toEndOf="@id/btnLeft"
+        app:layout_constraintTop_toTopOf="@id/btnLeft" />
+
+    <Button
+        android:id="@+id/btnRight"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/d16dp"
+        app:layout_constraintBottom_toBottomOf="@id/btnLeft"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btnMiddle"
+        app:layout_constraintTop_toTopOf="@id/btnLeft" />
+
+    <Button
+        android:id="@+id/btnUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/d16dp"
+        android:text="Up"
+        app:layout_constraintBottom_toTopOf="@id/btnMiddle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnRename"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/d16dp"
+        android:layout_marginVertical="@dimen/d16dp"
+        android:text="改名"
+        app:layout_constraintBottom_toTopOf="@id/btnUp"
+        app:layout_constraintEnd_toStartOf="@id/btn"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/btnRename"
+        app:layout_constraintEnd_toStartOf="@id/btnReadVersion"
+        app:layout_constraintStart_toEndOf="@id/btnRename"
+        app:layout_constraintTop_toTopOf="@id/btnRename" />
+
+    <Button
+        android:id="@+id/btnReadVersion"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/d16dp"
+        android:text="读取版本"
+        app:layout_constraintBottom_toBottomOf="@id/btnRename"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn"
+        app:layout_constraintTop_toTopOf="@id/btnRename" />
+
+    <Button
+        android:id="@+id/btnShakeHand"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/d16dp"
+        android:layout_marginVertical="@dimen/d16dp"
+        android:text="握手"
+        app:layout_constraintBottom_toTopOf="@id/btnRename"
+        app:layout_constraintEnd_toStartOf="@id/btnStart"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnStart"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/btnShakeHand"
+        app:layout_constraintEnd_toStartOf="@id/btnReadVersion"
+        app:layout_constraintStart_toEndOf="@id/btnShakeHand"
+        app:layout_constraintTop_toTopOf="@id/btnShakeHand" />
+
+    <Button
+        android:id="@+id/btnStop"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/d16dp"
+        android:text="停止"
+        app:layout_constraintBottom_toBottomOf="@id/btnShakeHand"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btnStart"
+        app:layout_constraintTop_toTopOf="@id/btnShakeHand" />
 </androidx.constraintlayout.widget.ConstraintLayout>
