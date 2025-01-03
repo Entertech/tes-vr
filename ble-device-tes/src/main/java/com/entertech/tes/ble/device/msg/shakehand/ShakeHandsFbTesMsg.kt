@@ -1,11 +1,12 @@
-package com.entertech.tes.ble.device.msg.receive
+package com.entertech.tes.ble.device.msg.shakehand
 
 import com.entertech.tes.ble.TesVrLog
+import com.entertech.tes.ble.device.msg.BaseReceiveTesMsg
 
 /**
  * 反馈消息
  * */
-class FeedbackTesMsg : BaseReceiveTesMsg() {
+class ShakeHandsFbTesMsg : BaseReceiveTesMsg(),IShakeHandFunction {
 
     companion object {
         const val INDEX_DEVICE_STATUS = 0
@@ -13,16 +14,17 @@ class FeedbackTesMsg : BaseReceiveTesMsg() {
         const val INDEX_RNG = 2
         const val INDEX_CRC = 3
         private const val TAG = "FeedbackTesMsg"
-        const val COMMAND_BYTE=0x00.toByte()
+        const val DEVICE_STATUS_UN_KNOW: Int = -1
+        const val DEVICE_STATUS_RUNNING: Int = 1
+        const val DEVICE_STATUS_READY: Int = 2
+        const val DEVICE_STATUS_ERROR: Int = 3
+
     }
 
     override fun getMsgLength(): Byte {
         return 0x09
     }
 
-    override fun getCommandByte(): Byte {
-        return 0x00
-    }
 
     override fun processMsgData(byteArray: ByteArray): Boolean {
         val deviceStatus = byteArray.getOrNull(INDEX_DATA_START + INDEX_DEVICE_STATUS)
@@ -39,10 +41,10 @@ class FeedbackTesMsg : BaseReceiveTesMsg() {
                 TesVrLog.d(TAG, "设备故障")
             }
             else->{
-                TesVrLog.d(TAG, "未知状态")
+                TesVrLog.d(TAG, "未知状态 $deviceStatus")
             }
         }
-        val deviceBattery = byteArray.getOrNull(INDEX_DATA_START + INDEX_DEVICE_BATTERY)
+        val deviceBattery = byteArray.getOrNull(INDEX_DATA_START + INDEX_DEVICE_BATTERY)?.toInt()
         TesVrLog.d(TAG, "设备电量 $deviceBattery")
         val rng = byteArray.getOrNull(INDEX_DATA_START + INDEX_RNG)
         val crc = byteArray.getOrNull(INDEX_DATA_START + INDEX_CRC)

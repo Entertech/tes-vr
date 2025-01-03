@@ -12,7 +12,7 @@ import cn.entertech.ble.uid.property.BluetoothProperty
 import com.entertech.tes.ble.TesVrLog
 import com.entertech.tes.ble.device.TesDeviceManager
 import com.entertech.tes.ble.device.msg.AnalysisTesMsgTool
-import com.entertech.tes.ble.device.msg.send.ShakeHandsTesMsg
+import com.entertech.tes.ble.device.msg.shakehand.ShakeHandsTesMsg
 import com.entertech.tes.vr.MainActivity.Companion.DEVICE_TO_PHONE_UUID
 import com.entertech.tes.vr.MainActivity.Companion.PHONE_TO_DEVICE_UUID
 

@@ -9,8 +9,18 @@ import com.entertech.tes.ble.device.msg.BaseTesMsg.Companion.INDEX_PACKET_LENGTH
 import com.entertech.tes.ble.device.msg.BaseTesMsg.Companion.PACKET_HEAD_1
 import com.entertech.tes.ble.device.msg.BaseTesMsg.Companion.PACKET_HEAD_2
 import com.entertech.tes.ble.device.msg.BaseTesMsg.Companion.PACKET_INDEX
-import com.entertech.tes.ble.device.msg.receive.BaseReceiveTesMsg
-import com.entertech.tes.ble.device.msg.receive.FeedbackTesMsg
+import com.entertech.tes.ble.device.msg.control.ControlCommandFdTesMsg
+import com.entertech.tes.ble.device.msg.control.IControlCommandFunction
+import com.entertech.tes.ble.device.msg.current.IRegulationCurrentFunction
+import com.entertech.tes.ble.device.msg.current.RegulationCurrentFbTesMsg
+import com.entertech.tes.ble.device.msg.rename.IRenameFunction
+import com.entertech.tes.ble.device.msg.rename.RenameFbTesMsg
+import com.entertech.tes.ble.device.msg.set.ISetFunction
+import com.entertech.tes.ble.device.msg.set.SettingArgFbTesMsg
+import com.entertech.tes.ble.device.msg.shakehand.IShakeHandFunction
+import com.entertech.tes.ble.device.msg.shakehand.ShakeHandsFbTesMsg
+import com.entertech.tes.ble.device.msg.version.IVersionFunction
+import com.entertech.tes.ble.device.msg.version.ReadVersionFbTesMsg
 
 object AnalysisTesMsgTool {
     private const val TAG = "AnalysisTesMsgTool"
@@ -39,18 +49,37 @@ object AnalysisTesMsgTool {
         }
         //命令符
         val cmd = byteArray.getOrNull(INDEX_COMMAND)
-        when (cmd) {
-            FeedbackTesMsg.COMMAND_BYTE -> {
-                val mFeedbackTesMsg = FeedbackTesMsg()
-                mFeedbackTesMsg.processMsgData(byteArray)
-                return mFeedbackTesMsg
+        val receiveTesMsg: BaseReceiveTesMsg? = when (cmd) {
+            IShakeHandFunction.COMMAND_BYTE_SHAKE_HAND -> {
+                ShakeHandsFbTesMsg()
+            }
+
+            IControlCommandFunction.COMMAND_BYTE_CONTROL_COMMAND -> {
+                ControlCommandFdTesMsg()
+            }
+
+            IRegulationCurrentFunction.COMMAND_BYTE_REGULATION_CURRENT -> {
+                RegulationCurrentFbTesMsg()
+            }
+
+            IRenameFunction.COMMAND_BYTE_RENAME -> {
+                RenameFbTesMsg()
+            }
+
+            ISetFunction.COMMAND_BYTE_SET -> {
+                SettingArgFbTesMsg()
+            }
+
+            IVersionFunction.COMMAND_BYTE_VERSION -> {
+                ReadVersionFbTesMsg()
             }
 
             else -> {
-
+                null
             }
         }
-        return null
+        receiveTesMsg?.processMsgData(byteArray)
+        return receiveTesMsg
 
     }
 }

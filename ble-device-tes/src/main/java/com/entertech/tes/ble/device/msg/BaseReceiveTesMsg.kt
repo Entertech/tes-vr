@@ -1,7 +1,4 @@
-package com.entertech.tes.ble.device.msg.receive
-
-import com.entertech.tes.ble.TesVrLog
-import com.entertech.tes.ble.device.msg.BaseTesMsg
+package com.entertech.tes.ble.device.msg
 
 /**
  * app 接收的消息
@@ -12,7 +9,6 @@ abstract class BaseReceiveTesMsg : BaseTesMsg() {
 
 
     }
-
 
     abstract fun processMsgData(byteArray: ByteArray): Boolean
 }

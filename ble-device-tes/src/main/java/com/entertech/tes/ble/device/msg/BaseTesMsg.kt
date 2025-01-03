@@ -26,7 +26,4 @@ abstract class BaseTesMsg {
 
     abstract fun getMsgLength(): Byte
 
-    abstract fun getCommandByte(): Byte
-
-
 }
