@@ -196,10 +196,18 @@ class ControlDeviceViewModel : ViewModel() {
         )
     }
 
-    fun byteToHex(byte: Byte?): String {
+    private fun byteToHex(byte: Byte?): String {
         if (byte == null) {
             return "null"
         }
         return "0x" + String.format("%02X", byte)
+    }
+
+    private fun byteArrayToHex(byteArray: ByteArray): String {
+        val sb = StringBuilder()
+        for (byte in byteArray) {
+            sb.append(byteToHex(byte))
+        }
+        return sb.toString()
     }
 }
