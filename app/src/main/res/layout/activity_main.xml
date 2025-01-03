@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="@dimen/d16dp"
+    android:padding="16dp"
     tools:context=".MainActivity">
 
     <TextView
@@ -18,37 +18,37 @@
         android:id="@+id/spinnerServiceUuid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/d12dp" />
+        android:layout_marginTop="12dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/d12dp"
+        android:layout_marginTop="12dp"
         android:text="透传TX特征的UUID(模块->手机方向)" />
 
     <Spinner
         android:id="@+id/spinnerDeviceToPhoneUUid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/d12dp" />
+        android:layout_marginTop="12dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/d12dp"
+        android:layout_marginTop="12dp"
         android:text="透传TX特征的UUID(模块->手机方向)" />
 
     <Spinner
         android:id="@+id/spinnerPhoneToDeviceUUid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/d12dp" />
+        android:layout_marginTop="12dp" />
 
     <Button
         android:id="@+id/btnOK"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="@dimen/d40dp"
+        android:layout_marginTop="40dp"
         android:text="确定" />
 </LinearLayout>

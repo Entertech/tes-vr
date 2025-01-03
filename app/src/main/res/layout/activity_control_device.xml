@@ -7,11 +7,26 @@
     android:layout_height="match_parent"
     tools:context=".ControlDeviceActivity">
 
+    <TextView
+        android:id="@+id/tvDeviceInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="设备状态：设备电量 "
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvReceiveMsg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="接受到的消息: "
+        app:layout_constraintTop_toBottomOf="@id/tvDeviceInfo" />
     <Button
         android:id="@+id/btnDown"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="@dimen/d16dp"
+        android:layout_marginVertical="16dp"
         android:text="down"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,8 +36,8 @@
         android:id="@+id/btnLeft"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/d16dp"
-        android:layout_marginVertical="@dimen/d16dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="16dp"
         app:layout_constraintBottom_toTopOf="@id/btnDown"
         app:layout_constraintEnd_toStartOf="@id/btnMiddle"
         app:layout_constraintHorizontal_chainStyle="packed"
@@ -41,7 +56,7 @@
         android:id="@+id/btnRight"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/d16dp"
+        android:layout_marginHorizontal="16dp"
         app:layout_constraintBottom_toBottomOf="@id/btnLeft"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/btnMiddle"
@@ -51,7 +66,7 @@
         android:id="@+id/btnUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="@dimen/d16dp"
+        android:layout_marginVertical="16dp"
         android:text="Up"
         app:layout_constraintBottom_toTopOf="@id/btnMiddle"
         app:layout_constraintEnd_toEndOf="parent"
@@ -61,18 +76,19 @@
         android:id="@+id/btnRename"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/d16dp"
-        android:layout_marginVertical="@dimen/d16dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="16dp"
         android:text="改名"
         app:layout_constraintBottom_toTopOf="@id/btnUp"
-        app:layout_constraintEnd_toStartOf="@id/btn"
+        app:layout_constraintEnd_toStartOf="@id/btnCurrent"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/btn"
+        android:id="@+id/btnCurrent"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:text="电流调节"
         app:layout_constraintBottom_toBottomOf="@id/btnRename"
         app:layout_constraintEnd_toStartOf="@id/btnReadVersion"
         app:layout_constraintStart_toEndOf="@id/btnRename"
@@ -82,42 +98,43 @@
         android:id="@+id/btnReadVersion"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/d16dp"
+        android:layout_marginHorizontal="16dp"
         android:text="读取版本"
         app:layout_constraintBottom_toBottomOf="@id/btnRename"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/btn"
+        app:layout_constraintStart_toEndOf="@id/btnCurrent"
         app:layout_constraintTop_toTopOf="@id/btnRename" />
 
     <Button
         android:id="@+id/btnShakeHand"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/d16dp"
-        android:layout_marginVertical="@dimen/d16dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="16dp"
         android:text="握手"
         app:layout_constraintBottom_toTopOf="@id/btnRename"
-        app:layout_constraintEnd_toStartOf="@id/btnStart"
+        app:layout_constraintEnd_toStartOf="@id/btnSetArgAndStart"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/btnStart"
+        android:id="@+id/btnSetArgAndStart"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:text="设置参数并启动"
         app:layout_constraintBottom_toBottomOf="@id/btnShakeHand"
         app:layout_constraintEnd_toStartOf="@id/btnReadVersion"
         app:layout_constraintStart_toEndOf="@id/btnShakeHand"
         app:layout_constraintTop_toTopOf="@id/btnShakeHand" />
 
     <Button
-        android:id="@+id/btnStop"
+        android:id="@+id/btnSendControlCommand"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/d16dp"
-        android:text="停止"
+        android:layout_marginHorizontal="16dp"
+        android:text="发送控制命令"
         app:layout_constraintBottom_toBottomOf="@id/btnShakeHand"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/btnStart"
+        app:layout_constraintStart_toEndOf="@id/btnSetArgAndStart"
         app:layout_constraintTop_toTopOf="@id/btnShakeHand" />
 </androidx.constraintlayout.widget.ConstraintLayout>

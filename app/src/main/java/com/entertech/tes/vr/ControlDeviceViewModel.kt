@@ -24,6 +24,8 @@ import com.entertech.tes.vr.MainActivity.Companion.PHONE_TO_DEVICE_UUID
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 
@@ -40,6 +42,14 @@ class ControlDeviceViewModel : ViewModel() {
         TesDeviceManager(context = TesVrApp.instance)
     }
     private var shakeHandsTesMsg: ShakeHandsTesMsg? = null
+    private val _toastMsg = MutableStateFlow("")
+    val toastMsg = _toastMsg.asStateFlow()
+
+    private val _deviceInfo = MutableStateFlow("")
+    val deviceInfo = _deviceInfo.asStateFlow()
+
+    private val _receiveMsg = MutableStateFlow("")
+    val receiveMsg = _receiveMsg.asStateFlow()
 
     fun initPermission(activity: Activity, allPermissionGranted: () -> Unit) {
         val needPermission = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
@@ -150,12 +160,18 @@ class ControlDeviceViewModel : ViewModel() {
                     BluetoothProperty.BLUETOOTH_PROPERTY_NOTIFY
                 )
             ), { notifyData ->
-                TesVrLog.d(TAG, "notify data :${notifyData.contentToString()}")
+                viewModelScope.launch {
+                    _receiveMsg.value = byteArrayToHex(notifyData)
+                }
                 when (val msg = AnalysisTesMsgTool.processMsg(notifyData)) {
                     is ShakeHandsFbTesMsg -> {
                         val newDeviceStatus = msg.deviceStatus
                         val newDeviceBattery = msg.deviceBattery
                         val newRng = msg.rng
+                        val deviceInfo = "设备状态 $newDeviceStatus 设备电量 $newDeviceBattery "
+                        viewModelScope.launch {
+                            _deviceInfo.value = deviceInfo
+                        }
                         TesVrLog.d(
                             TAG,
                             "设备状态 $newDeviceStatus 设备电量 $newDeviceBattery 设备rng ${
@@ -200,13 +216,13 @@ class ControlDeviceViewModel : ViewModel() {
         if (byte == null) {
             return "null"
         }
-        return "0x" + String.format("%02X", byte)
+        return String.format("%02X", byte)
     }
 
     private fun byteArrayToHex(byteArray: ByteArray): String {
         val sb = StringBuilder()
         for (byte in byteArray) {
-            sb.append(byteToHex(byte))
+            sb.append(byteToHex(byte)).append("")
         }
         return sb.toString()
     }
