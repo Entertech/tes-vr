@@ -35,6 +35,30 @@
             android:layout_height="wrap_content">
 
             <Button
+                android:id="@+id/btnIncreaseCurrent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="增加电流" />
+
+            <Button
+                android:id="@+id/btnReduceCurrent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="减少电流" />
+
+            <EditText
+                android:id="@+id/etCurrent"
+                android:layout_width="60dp"
+                android:text="0"
+                android:gravity="center"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
                 android:id="@+id/btnDeviceStart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

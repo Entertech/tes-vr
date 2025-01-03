@@ -5,7 +5,8 @@ import com.entertech.tes.ble.device.msg.BaseSendTesMsg
 /**
  * 调节电流
  * */
-class RegulationCurrentTesMsg : BaseSendTesMsg(), IRegulationCurrentFunction {
+class RegulationCurrentTesMsg(val current: Byte, val type: Byte) : BaseSendTesMsg(),
+    IRegulationCurrentFunction {
     companion object {
         const val INDEX_REGULATION_CURRENT = 1
 
@@ -21,8 +22,8 @@ class RegulationCurrentTesMsg : BaseSendTesMsg(), IRegulationCurrentFunction {
     }
 
     override fun createDataBytes(byteArray: ByteArray) {
-        byteArray[INDEX_DATA_START] = 0x01
-        byteArray[INDEX_DATA_START + INDEX_REGULATION_CURRENT] = REGULATION_CURRENT_INCREASE
+        byteArray[INDEX_DATA_START] = current
+        byteArray[INDEX_DATA_START + INDEX_REGULATION_CURRENT] = type
     }
 
     override fun getMsgLength(): Byte {

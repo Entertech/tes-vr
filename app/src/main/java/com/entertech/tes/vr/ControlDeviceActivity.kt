@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.View.OnClickListener
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +13,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.entertech.tes.ble.TesVrLog
 import com.entertech.tes.ble.device.msg.control.ControlCommandTesMsg
+import com.entertech.tes.ble.device.msg.current.IRegulationCurrentFunction
+import com.entertech.tes.ble.device.msg.current.RegulationCurrentTesMsg
+import com.entertech.tes.ble.device.msg.current.RegulationCurrentTesMsg.Companion.REGULATION_CURRENT_INCREASE
+import com.entertech.tes.ble.device.msg.current.RegulationCurrentTesMsg.Companion.REGULATION_CURRENT_REDUCE
 import com.entertech.tes.ble.device.msg.version.ReadVersionTesMsg
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -34,7 +39,10 @@ class ControlDeviceActivity : AppCompatActivity(), OnClickListener {
     private var btnShakeHand: Button? = null
     private var btnUpload: Button? = null
     private var btnRename: Button? = null
+    private var btnIncreaseCurrent: Button? = null
     private var btnReadVersion: Button? = null
+    private var etCurrent: EditText? = null
+    private var btnReduceCurrent: EditText? = null
     private var btnSetArgAndStart: Button? = null
     private var tvDeviceInfo: TextView? = null
     private var btnUp: Button? = null
@@ -50,6 +58,9 @@ class ControlDeviceActivity : AppCompatActivity(), OnClickListener {
         btnDevicePowerOff = findViewById(R.id.btnDevicePowerOff)
         btnUpload = findViewById(R.id.btnUpload)
         btnRename = findViewById(R.id.btnRename)
+        etCurrent = findViewById(R.id.etCurrent)
+        btnReduceCurrent = findViewById(R.id.btnReduceCurrent)
+        btnIncreaseCurrent = findViewById(R.id.etCurrent)
         tvReceiveMsg = findViewById(R.id.tvReceiveMsg)
         tvDeviceInfo = findViewById(R.id.tvDeviceInfo)
         btnReadVersion = findViewById(R.id.btnReadVersion)
@@ -64,6 +75,8 @@ class ControlDeviceActivity : AppCompatActivity(), OnClickListener {
         btnReadVersion?.setOnClickListener(this)
         btnUp?.setOnClickListener(this)
         btnDown?.setOnClickListener(this)
+        btnReduceCurrent?.setOnClickListener(this)
+        btnIncreaseCurrent?.setOnClickListener(this)
         btnSetArgAndStart?.setOnClickListener(this)
         lifecycleScope.launch(Dispatchers.Main) {
             mControlDeviceViewModel.toastMsg.collect {
@@ -125,6 +138,24 @@ class ControlDeviceActivity : AppCompatActivity(), OnClickListener {
             R.id.btnDevicePowerOff -> {
                 mControlDeviceViewModel.sendMessage(
                     ControlCommandTesMsg(ControlCommandTesMsg.CONTROL_COMMAND_POWER_OFF), intent
+                )
+            }
+
+            R.id.btnReduceCurrent -> {
+                val current = IRegulationCurrentFunction.currentValueToByte(
+                    etCurrent?.text.toString().toDouble()
+                )
+                mControlDeviceViewModel.sendMessage(
+                    RegulationCurrentTesMsg(current, REGULATION_CURRENT_REDUCE), intent
+                )
+            }
+
+            R.id.btnIncreaseCurrent -> {
+                val current = IRegulationCurrentFunction.currentValueToByte(
+                    etCurrent?.text.toString().toDouble()
+                )
+                mControlDeviceViewModel.sendMessage(
+                    RegulationCurrentTesMsg(current, REGULATION_CURRENT_INCREASE), intent
                 )
             }
 
