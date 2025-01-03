@@ -13,9 +13,11 @@ import cn.entertech.ble.uid.characteristic.BluetoothCharacteristic
 import cn.entertech.ble.uid.property.BluetoothProperty
 import com.entertech.tes.ble.TesVrLog
 import com.entertech.tes.ble.device.DeviceStatus
+import com.entertech.tes.ble.device.ModeType
 import com.entertech.tes.ble.device.TesDeviceManager
 import com.entertech.tes.ble.device.msg.AnalysisTesMsgTool
 import com.entertech.tes.ble.device.msg.BaseSendTesMsg
+import com.entertech.tes.ble.device.msg.set.SettingArgTesMsg
 import com.entertech.tes.ble.device.msg.shakehand.ShakeHandsFbTesMsg
 import com.entertech.tes.ble.device.msg.shakehand.ShakeHandsTesMsg
 import com.entertech.tes.ble.device.msg.version.ReadVersionFbTesMsg
@@ -150,6 +152,21 @@ class ControlDeviceViewModel : ViewModel() {
         }
     }
 
+    fun setArgAndStart(
+        mode: String,
+        current: Double,
+        time: Int,
+        frequency: Int,
+        intent: Intent
+    ) {
+        val modeType= ModeType.getModeTypeByDes(mode)?:return
+        val msg = SettingArgTesMsg(
+            modeType = modeType.command,
+            time = time.toByte(),
+            frequency = intToLittleEndianBytes(frequency),
+        )
+        sendMessage(msg, intent)
+    }
     fun connectDevice(intent: Intent) {
         tesDeviceManager.connectDevice({
             TesVrLog.d(TAG, "connect mac :$it")
@@ -225,5 +242,15 @@ class ControlDeviceViewModel : ViewModel() {
             sb.append(byteToHex(byte)).append("")
         }
         return sb.toString()
+    }
+
+
+    /**
+     * int转成16进制的小端字节数组
+     * */
+    private fun intToLittleEndianBytes(value: Int): ByteArray {
+        return ByteArray(2) { index ->
+            (value shr (index * 8) and 0xFF).toByte()
+        }
     }
 }

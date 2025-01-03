@@ -5,7 +5,7 @@ import com.entertech.tes.ble.device.msg.BaseSendTesMsg
 /**
  * 设置参数消息
  * */
-class SettingArgTesMsg: BaseSendTesMsg(),ISetFunction {
+class SettingArgTesMsg(private val modeType:Byte,val current:Byte=0x00,val time:Byte,val frequency:ByteArray): BaseSendTesMsg(),ISetFunction {
     companion object{
         /**
          * 模式设置
@@ -33,15 +33,15 @@ class SettingArgTesMsg: BaseSendTesMsg(),ISetFunction {
     }
 
     override fun createDataBytes(byteArray: ByteArray) {
-
+        byteArray[INDEX_DATA_START + INDEX_SETTING_MODE] = modeType
+        byteArray[INDEX_DATA_START + INDEX_SETTING_CURRENT] = current
+        byteArray[INDEX_DATA_START + INDEX_SETTING_TIME] = time
+        frequency.forEachIndexed { index, byte ->
+            byteArray[INDEX_DATA_START + INDEX_SETTING_FREQUENCY + index] = byte
+        }
     }
 
-    /**
-     * int转成16进制的小端字节数组
-     * */
-    private fun intToLittleEndianBytes(value: Int): ByteArray {
-        return ByteArray(4) { index ->
-            (value shr (index * 8) and 0xFF).toByte()
-        }
+    override fun hasCrcData(): Boolean {
+        return false
     }
 }

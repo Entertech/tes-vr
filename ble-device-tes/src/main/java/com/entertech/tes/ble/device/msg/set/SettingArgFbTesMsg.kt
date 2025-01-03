@@ -1,11 +1,12 @@
 package com.entertech.tes.ble.device.msg.set
 
+import com.entertech.tes.ble.TesVrLog
 import com.entertech.tes.ble.device.msg.BaseReceiveTesMsg
 
 /**
  * 设置参数反馈消息
  * */
-class SettingArgFbTesMsg : BaseReceiveTesMsg(),ISetFunction {
+class SettingArgFbTesMsg : BaseReceiveTesMsg(), ISetFunction {
 
     companion object {
         /**
@@ -15,6 +16,7 @@ class SettingArgFbTesMsg : BaseReceiveTesMsg(),ISetFunction {
         const val SETTING_ARG_RESULT_SUCCESS: Byte = 0x01
         const val SETTING_ARG_RESULT_FAILURE: Byte = 0x02
         const val SETTING_ARG_RESULT_ERROR: Byte = 0x03
+        private const val TAG = "SettingArgFbTesMsg"
     }
 
     override fun getMsgLength(): Byte {
@@ -22,9 +24,22 @@ class SettingArgFbTesMsg : BaseReceiveTesMsg(),ISetFunction {
     }
 
     override fun processMsgData(byteArray: ByteArray): Boolean {
-        val result = byteArray.getOrNull(INDEX_DATA_START + INDEX_SETTING_ARG_RESULT)
-        when (result) {
+        when (val result = byteArray.getOrNull(INDEX_DATA_START + INDEX_SETTING_ARG_RESULT)) {
+            SETTING_ARG_RESULT_SUCCESS -> {
+                TesVrLog.d(TAG, "设置参数成功")
+            }
 
+            SETTING_ARG_RESULT_FAILURE -> {
+                TesVrLog.d(TAG, "设置参数失败")
+            }
+
+            SETTING_ARG_RESULT_ERROR -> {
+                TesVrLog.d(TAG, "设置参数错误")
+            }
+
+            else -> {
+                TesVrLog.d(TAG, "设置参数未知错误 $result")
+            }
         }
         return true
     }

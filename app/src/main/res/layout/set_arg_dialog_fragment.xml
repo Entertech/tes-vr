@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- 模式设置 Spinner -->
+    <TextView
+        android:id="@+id/mode_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="模式设置 (Mode)"
+        android:textSize="16sp" />
+    <Spinner
+        android:id="@+id/mode_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!-- 电流设置 -->
+    <TextView
+        android:id="@+id/current_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="电流设置 (Current)"
+        android:textSize="16sp" />
+    <EditText
+        android:id="@+id/current_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="请输入电流 (0.04-2 mA)"
+        android:inputType="numberDecimal" />
+
+    <!-- 时间设置 -->
+    <TextView
+        android:id="@+id/time_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="时间设置 (Time)"
+        android:textSize="16sp" />
+    <EditText
+        android:id="@+id/time_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="请输入时间 (0-40 分钟)"
+        android:inputType="number" />
+
+    <!-- 频率设置 -->
+    <TextView
+        android:id="@+id/frequency_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="频率设置 (Frequency)"
+        android:textSize="16sp" />
+    <EditText
+        android:id="@+id/frequency_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="请输入频率 (1-1000 Hz)"
+        android:inputType="number" />
+
+    <!-- 操作按钮 -->
+    <Button
+        android:id="@+id/confirm_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="确认 (Confirm)" />
+    <Button
+        android:id="@+id/cancel_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="取消 (Cancel)" />
+
+</LinearLayout>

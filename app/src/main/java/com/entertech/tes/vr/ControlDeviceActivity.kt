@@ -115,6 +115,9 @@ class ControlDeviceActivity : AppCompatActivity(), OnClickListener {
 
             R.id.btnSetArgAndStart -> {
                 //设置参数并启动
+                SetArgDialogFragment { mode, current, time, frequency ->
+                    mControlDeviceViewModel.setArgAndStart(mode, current, time, frequency, intent)
+                }.show(supportFragmentManager, "SetArgDialogFragment")
             }
         }
     }
