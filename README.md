@@ -1,3 +1,4 @@
+demo:http://fir.entertech.cn/uyfbp5ve
 # TesDeviceManager SDK 文档
 
 ## 简介
