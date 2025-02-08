@@ -5,14 +5,14 @@ plugins {
 
 android {
     namespace = "com.entertech.tes.vr"
-    compileSdk = 35
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.entertech.tes.vr"
         minSdk = 24
-        targetSdk = 35
-        versionCode = 1
-        versionName = "1.0"
+        targetSdk = 34
+        versionCode = 6
+        versionName = "0.0.6"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -45,8 +45,13 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
-    implementation(project(":ble-device-tes"))
+//    implementation(project(":ble-device-tes"))
+    implementation (libs.ble.device.tes)
+    implementation("cn.entertech.android:base:0.0.5")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    implementation (libs.androidx.datastore.preferences)
+    implementation (libs.androidx.datastore.core)
+    implementation (libs.androidx.datastore)
 }
