@@ -51,4 +51,13 @@
         android:layout_gravity="center"
         android:layout_marginTop="40dp"
         android:text="确定" />
+
+    <Button
+        android:id="@+id/btnDebug"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:text="Debug" />
 </LinearLayout>

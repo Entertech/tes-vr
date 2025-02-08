@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".mode.normal.NormalModeActivity">
+
+    <TextView
+        android:id="@+id/tvReceiveMsg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="接受到的消息: " />
+
+    <TextView
+        android:id="@+id/tvDeviceInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="设备状态：设备电量 " />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/d16dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/etCurrentValue"
+            android:layout_width="@dimen/d0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="最大电流值【0-200】每一单位0.01mA"
+            android:visibility="gone" />
+
+        <EditText
+            android:id="@+id/etTimeValue"
+            android:layout_width="@dimen/d0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="时间【0-40】min 默认30min"
+            android:inputType="number"
+            android:paddingStart="@dimen/d16dp" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switchValueMode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/d16dp"
+            android:checked="false"
+            android:text="HEX"
+            android:visibility="gone"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+    </LinearLayout>
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switchAutoIncreaseCurrent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/d16dp"
+        android:checked="false"
+        android:text="自动上升电流"
+        android:visibility="gone"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/d16dp"
+        android:layout_weight="1"
+        android:baselineAligned="false"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnStartDevice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="启动设备" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnStopDevice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="停止设备" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/d16dp"
+        android:layout_weight="1"
+        android:baselineAligned="false"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnRiseCurrent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="电流上升" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnStopChangeCurrent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="暂停电流的停止｜上升" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnFallCurrent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="电流下降" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

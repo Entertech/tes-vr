@@ -1,6 +1,10 @@
 package com.entertech.tes.vr
 
+import android.Manifest.permission.POST_NOTIFICATIONS
+import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -8,18 +12,26 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import com.entertech.tes.ble.TesVrLog
+import com.entertech.tes.ble.device.TesDeviceManager.Companion.DEVICE_TO_PHONE_UUID
+import com.entertech.tes.ble.device.TesDeviceManager.Companion.PHONE_TO_DEVICE_UUID
+import com.entertech.tes.vr.connect.ConnectDeviceActivity
+import com.entertech.tes.vr.control.ControlDeviceActivity
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
     companion object {
         const val SERVICE_UUID = "serviceUuid"
-        const val DEVICE_TO_PHONE_UUID = "deviceToPhoneUUid"
-        const val PHONE_TO_DEVICE_UUID = "phoneToDeviceUUid"
+        private const val TAG = "MainActivity"
+
     }
 
     private var spinnerServiceUuid: Spinner? = null
     private var spinnerDeviceToPhoneUUid: Spinner? = null
     private var spinnerPhoneToDeviceUUid: Spinner? = null
     private var btnOK: Button? = null
+    private var btnDebug: Button? = null
     private var serviceUuid: String = ""
     private var deviceToPhoneUUid: String = ""
     private var phoneToDeviceUUid: String = ""
@@ -46,7 +58,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         btnOK = findViewById(R.id.btnOK)
+        btnDebug = findViewById(R.id.btnDebug)
         btnOK?.setOnClickListener(this)
+        btnDebug?.setOnClickListener(this)
         spinnerServiceUuid = findViewById(R.id.spinnerServiceUuid)
         spinnerDeviceToPhoneUUid = findViewById(R.id.spinnerDeviceToPhoneUUid)
         spinnerPhoneToDeviceUUid = findViewById(R.id.spinnerPhoneToDeviceUUid)
@@ -59,6 +73,33 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         initSpinner(spinnerPhoneToDeviceUUid, phoneToDeviceUUidList) {
             phoneToDeviceUUid = it
         }
+        requestNotificationPermission()
+    }
+
+    private fun requestNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(
+                    this, POST_NOTIFICATIONS
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                ActivityCompat.requestPermissions(
+                    (this as Activity), arrayOf(POST_NOTIFICATIONS), 0
+                )
+            }
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int, permissions: Array<out String>, grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == 0) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                TesVrLog.d(TAG, "通知权限已授予")
+            } else {
+                TesVrLog.e(TAG, "用户拒绝了通知权限")
+            }
+        }
     }
 
     private fun initSpinner(spinner: Spinner?, data: List<String>, select: (String) -> Unit) {
@@ -67,7 +108,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         spinner?.adapter = adapter
         spinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
-                parent: AdapterView<*>, view: View, position: Int, id: Long
+                parent: AdapterView<*>, view: View?, position: Int, id: Long
             ) {
                 // 获取选择的项
                 select(data[position])
@@ -86,6 +127,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.btnOK -> {
+                val intent = Intent(this, ConnectDeviceActivity::class.java)
+                intent.putExtra(SERVICE_UUID, serviceUuid)
+                intent.putExtra(DEVICE_TO_PHONE_UUID, deviceToPhoneUUid)
+                intent.putExtra(PHONE_TO_DEVICE_UUID, phoneToDeviceUUid)
+                startActivity(intent)
+            }
+            R.id.btnDebug -> {
                 val intent = Intent(this, ControlDeviceActivity::class.java)
                 intent.putExtra(SERVICE_UUID, serviceUuid)
                 intent.putExtra(DEVICE_TO_PHONE_UUID, deviceToPhoneUUid)

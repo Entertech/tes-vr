@@ -5,34 +5,133 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ControlDeviceActivity">
-
-    <TextView
-        android:id="@+id/tvDeviceInfo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="设备状态：设备电量 "
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tvReceiveMsg"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="接受到的消息: "
-        app:layout_constraintTop_toBottomOf="@id/tvDeviceInfo" />
-
+    tools:context=".control.ControlDeviceActivity">
 
     <LinearLayout
+        android:id="@+id/llTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tvReceiveMsg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="接受到的消息: " />
+
+        <TextView
+            android:id="@+id/tvConnectStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/d10dp"
+            android:text="连接状态"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvReceiveMsg" />
+
+        <TextView
+            android:id="@+id/tvDeviceInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="设备状态：设备电量 " />
+    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvLogs"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/d16dp"
+        app:layout_constraintTop_toBottomOf="@id/llTop"
+        app:layout_constraintBottom_toTopOf="@+id/llBottom"/>
+
+    <LinearLayout
+        android:id="@+id/llBottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent">
 
+        <Button
+            android:id="@+id/btnConnectDevice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="连接设备" />
+
+        <Button
+            android:id="@+id/btnConnectDeviceByName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="连接设备by Name" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnShakeHand"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="握手" />
+
+
+            <Button
+                android:id="@+id/btnStartFake"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="开始伪刺激" />
+            <Button
+                android:id="@+id/btnStopFake"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="停止伪刺激" />
+        </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btnSetArgAndStart"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="设备启动" />
+
+            <Button
+                android:id="@+id/btnDeviceStop"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="设备停止" />
+
+            <Button
+                android:id="@+id/btnDeviceDisconnect"
+                android:layout_width="0dp"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="断开连接" />
+
+            <Button
+                android:id="@+id/btnDevicePowerOff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="关机" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone">
 
             <Button
                 android:id="@+id/btnRename"
@@ -64,92 +163,9 @@
                 android:layout_height="wrap_content"
                 android:text="减少电流" />
 
-            <EditText
-                android:id="@+id/etCurrent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="0" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
-            <Button
-                android:id="@+id/btnDeviceStart"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="设备启动" />
-
-            <Button
-                android:id="@+id/btnDeviceStop"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="设备停止" />
-
-            <Button
-                android:id="@+id/btnDeviceDisconnect"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="断开连接" />
-
-            <Button
-                android:id="@+id/btnDevicePowerOff"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="关机" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btnShakeHand"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="握手" />
-
-            <Button
-                android:id="@+id/btnSetArgAndStart"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="设置参数并启动" />
-
-            <Button
-                android:id="@+id/btnUpload"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="事件上报" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-
-            <Button
-                android:id="@+id/btnCurrent"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="电流调节" />
-
-            <Button
-                android:id="@+id/btnReadVersion"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="读取版本" />
-        </LinearLayout>
     </LinearLayout>
 
 

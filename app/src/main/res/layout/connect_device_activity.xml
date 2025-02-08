@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".connect.ConnectDeviceActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/d16dp"
+        android:layout_marginTop="@dimen/d20dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnConnectDeviceByMac"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="通过mac地址连接" />
+
+        <EditText
+            android:id="@+id/etDeviceMac"
+            android:layout_width="@dimen/d0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/d20dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/d16dp"
+        android:layout_marginTop="@dimen/d20dp"
+        android:visibility="gone"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnConnectDeviceByName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="通过名字连接" />
+
+        <EditText
+            android:id="@+id/etDeviceName"
+            android:layout_width="@dimen/d0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/d20dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+</LinearLayout>
