@@ -211,11 +211,16 @@ TesDeviceManager(context: Context, deviceToPhoneUUid: String, phoneToDeviceUUid:
 ***
 ### BaseReceiveTesMsg消息类型
 #### 控制命令反馈消息 ControlCommandFdTesMsg
-*   controlResult 控制指令结果 CONTROL_RESULT_SUCCESS 成功；CONTROL_RESULT_FAILURE 失败
+controlResult 控制指令结果
+- CONTROL_RESULT_SUCCESS 成功
+- CONTROL_RESULT_FAILURE 失败
 
 
 #### 调节电流反馈消息RegulationCurrentFbTesMsg
-1.regulationType： REGULATION_CURRENT_INCREASE 电流增加；REGULATION_CURRENT_REDUCE 电流减小
+1.regulationType：
+- REGULATION_CURRENT_INCREASE 电流增加
+- REGULATION_CURRENT_REDUCE 电流减小
+
 2.regulationResult ：调节结果
 -   REGULATION_RESULT_SUCCESS 调节成功；
 -   REGULATION_RESULT_TIME_NOT_ENOUGH:剩余时间不足，无法调至到此模式；
@@ -227,9 +232,6 @@ setArgResult：
 * SETTING_ARG_RESULT_SUCCESS:成功
 * SETTING_ARG_RESULT_FAILURE:失败
 * SETTING_ARG_RESULT_ERROR:参数错误
-
-
-#### 握手反馈消息 ShakeHandsFbTesMsg
 
 #### 开始伪刺激反馈消息StartPseudoStimulateFbTesMsg
 startSuccess：true 开始成功；false 开始失败
