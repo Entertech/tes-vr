@@ -13,13 +13,13 @@
 *   [类概述](#类概述)
 *   [构造函数](#构造函数)
 *   [主要方法](#主要方法)
-  *   [设备连接相关](#设备连接相关)
-  *   [消息发送与接收](#消息发送与接收)
-  *   [设备控制](#设备控制)
-  *   [电流调节](#电流调节)
-  *   [伪刺激模式](#伪刺激模式)
-  *   [事件监听](#事件监听)
-  *   [BaseReceiveTesMsg消息类型](#BaseReceiveTesMsg消息类型)
+    *   [设备连接相关](#设备连接相关)
+    *   [消息发送与接收](#消息发送与接收)
+    *   [设备控制](#设备控制)
+    *   [电流调节](#电流调节)
+    *   [伪刺激模式](#伪刺激模式)
+    *   [事件监听](#事件监听)
+    *   [BaseReceiveTesMsg消息类型](#BaseReceiveTesMsg消息类型)
 *   [辅助方法](#辅助方法)
 *   [备注](#备注)
 
@@ -242,13 +242,13 @@ stopSuccess：true 停止成功；false 停止失败
 #### 事件上报反馈消息UploadTesFbMsg
 1. newDeviceStatus 设备状态
 
-DEVICE_STATUS_IN_VALID  无效
-DEVICE_STATUS_RUNNING  设备运行中
-DEVICE_STATUS_READY  设备就绪中
-DEVICE_STATUS_ERROR  设备故障
-DEVICE_STATUS_CUR_DOWNING_NORMAL  设备当前正在正常降压
-DEVICE_STATUS_CUR_DOWNING_CONTROL  设备当前正在控制降压
-DEVICE_STATUS_STIMULATE_PSEUDO  伪刺激
+- DEVICE_STATUS_IN_VALID  无效
+- DEVICE_STATUS_RUNNING  设备运行中
+- DEVICE_STATUS_READY  设备就绪中
+- DEVICE_STATUS_ERROR  设备故障
+- DEVICE_STATUS_CUR_DOWNING_NORMAL  设备当前正在正常降压
+- DEVICE_STATUS_CUR_DOWNING_CONTROL  设备当前正在控制降压
+- DEVICE_STATUS_STIMULATE_PSEUDO  伪刺激
 
 2. deviceBattery 电池电量
 3. frequency 频率
