@@ -32,7 +32,10 @@
         <activity
             android:name=".mode.ChooseModeActivity"
             android:exported="false" />
-
+        <activity
+            android:name=".control.log.FileListActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:exported="false" />
         <activity
             android:name=".connect.ConnectDeviceActivity"
             android:exported="false" />
@@ -49,6 +52,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.entertech.tes.vr.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true"
+            tools:replace="android:authorities">
+
+            <!-- 指定Uri的共享路径 -->
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 
 </manifest>

@@ -14,11 +14,13 @@ import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import cn.entertech.base.util.startActivity
 import com.entertech.tes.ble.TesVrLog
 import com.entertech.tes.ble.device.TesDeviceManager.Companion.DEVICE_TO_PHONE_UUID
 import com.entertech.tes.ble.device.TesDeviceManager.Companion.PHONE_TO_DEVICE_UUID
 import com.entertech.tes.vr.connect.ConnectDeviceActivity
 import com.entertech.tes.vr.control.ControlDeviceActivity
+import com.entertech.tes.vr.control.log.FileListActivity
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
     companion object {
@@ -64,6 +66,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         spinnerServiceUuid = findViewById(R.id.spinnerServiceUuid)
         spinnerDeviceToPhoneUUid = findViewById(R.id.spinnerDeviceToPhoneUUid)
         spinnerPhoneToDeviceUUid = findViewById(R.id.spinnerPhoneToDeviceUUid)
+        findViewById<View>(R.id.showData)?.setOnClickListener(this)
         initSpinner(spinnerServiceUuid, serviceUUidList) {
             serviceUuid = it
         }
@@ -133,12 +136,17 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 intent.putExtra(PHONE_TO_DEVICE_UUID, phoneToDeviceUUid)
                 startActivity(intent)
             }
+
             R.id.btnDebug -> {
                 val intent = Intent(this, ControlDeviceActivity::class.java)
                 intent.putExtra(SERVICE_UUID, serviceUuid)
                 intent.putExtra(DEVICE_TO_PHONE_UUID, deviceToPhoneUUid)
                 intent.putExtra(PHONE_TO_DEVICE_UUID, phoneToDeviceUUid)
                 startActivity(intent)
+            }
+
+            R.id.showData -> {
+                startActivity(FileListActivity::class.java, finishCurrent = false)
             }
         }
     }
