@@ -87,7 +87,7 @@ abstract class BaseTesViewModel : ViewModel() {
         }
     }
 
-    private val Context.dataStore by preferencesDataStore(name = "tes_data_store")
+
     private val _toastMsg = MutableSharedFlow<String>()
     val toastMsg = _toastMsg.asSharedFlow()
     private val _connectStatus = MutableStateFlow("未连接")
