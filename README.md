@@ -13,13 +13,13 @@
 * [类概述](#类概述)
 * [构造函数](#构造函数)
 * [主要方法](#主要方法)
-    * [设备连接相关](#设备连接相关)
-    * [消息发送与接收](#消息发送与接收)
-    * [设备控制](#设备控制)
-    * [电流调节](#电流调节)
-    * [伪刺激模式](#伪刺激模式)
-    * [事件监听](#事件监听)
-    * [BaseReceiveTesMsg消息类型](#BaseReceiveTesMsg消息类型)
+* [设备连接相关](#设备连接相关)
+* [消息发送与接收](#消息发送与接收)
+* [设备控制](#设备控制)
+* [电流调节](#电流调节)
+* [伪刺激模式](#伪刺激模式)
+* [事件监听](#事件监听)
+* [BaseReceiveTesMsg消息类型](#BaseReceiveTesMsg消息类型)
 * [辅助方法](#辅助方法)
 * [备注](#备注)
 
@@ -40,7 +40,7 @@ repositories {
 在所需的module中的build.gradle文件下添加以下依赖：
 
 ```groovy
-implementation 'cn.entertech.android:ble-device-tes:0.0.3'
+implementation 'cn.entertech.android:ble-device-tes:0.0.4'
 ```
 
 ***
@@ -85,9 +85,9 @@ TesDeviceManager(context: Context, deviceToPhoneUUid: String, phoneToDeviceUUid:
 * success: (String) -> Unit - 连接成功的回调，返回设备地址。
 * failure: (String) -> Unit - 连接失败的回调，返回错误信息。
 
-### 设备状态重置
+### ~~设备状态重置~~
 
-当设备断开之后需要重置设备标识
+~~当设备断开之后需要重置设备标识 ~~\[0.0.4 版本后迁移至sdk内自动执行，业务层不需要执行]
 
     resetDeviceStatus
 
