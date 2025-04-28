@@ -111,7 +111,6 @@ abstract class BaseTesViewModel : ViewModel() {
         { error ->
             TesVrLog.e(TAG, "设备断开 原因：$error")
             _connectStatus.value = "设备连接状态：未连接"
-            tesDeviceManager?.resetDeviceStatus()
             deviceDisconnect()
         }
     }

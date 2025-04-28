@@ -1,7 +1,7 @@
 [versions]
 agp = "8.6.0"
 biomodulebleVersion = "3.0.0-tes"
-bleDeviceTes = "0.0.3"
+bleDeviceTes = "0.0.4"
 datastore = "1.1.2"
 jetbrainsKotlinxCoroutinesAndroid = "1.8.1"
 androidxLifecycleViewmodelKtx = "2.8.7"
