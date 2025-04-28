@@ -60,12 +60,15 @@ class TesDeviceManagerService : BaseService() {
     private var tesDeviceManager: TesDeviceManager? = null
 
 
+    override fun onCreate() {
+        super.onCreate()
+        isRunning = true
+    }
+
     override fun onBind(intent: Intent?): IBinder {
         initDeviceManager(intent)
         return TesServiceBinder(this)
     }
-
-
 
     private fun updateNotification(title: String, content: String) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -151,7 +154,6 @@ class TesDeviceManagerService : BaseService() {
                 )
             )
         }
-        isRunning = true
         return super.onStartCommand(intent, flags, startId)
     }
 
