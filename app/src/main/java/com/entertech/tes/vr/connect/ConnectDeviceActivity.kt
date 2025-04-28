@@ -4,12 +4,9 @@ import android.content.Intent
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import cn.entertech.base.BaseActivity
 import com.entertech.tes.vr.BaseTesActivity
 import com.entertech.tes.vr.R
 import com.entertech.tes.vr.mode.ChooseModeActivity
@@ -61,13 +58,18 @@ class ConnectDeviceActivity : BaseTesActivity<ConnectDeviceViewModel>() {
                 }
             }
         }
-
-
     }
 
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.btnConnectDeviceByMac -> {
+                if (viewModel.isDeviceConnected()) {
+                    val intent1 = Intent(this@ConnectDeviceActivity, ChooseModeActivity::class.java)
+                    intent1.putExtras(intent)
+                    startActivity(intent1)
+                    return
+                }
+
                 val mac = etDeviceMac?.text.toString()
                 lifecycleScope.launch {
                     viewModel.saveToStringDataStore(this@ConnectDeviceActivity, "device_mac", mac)

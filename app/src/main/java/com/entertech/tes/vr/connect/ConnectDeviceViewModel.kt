@@ -7,8 +7,8 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 
 class ConnectDeviceViewModel : BaseTesViewModel() {
-    private val _connectedStatus= MutableSharedFlow<Unit>()
-    val connectedStatus=_connectedStatus.asSharedFlow()
+    private val _connectedStatus = MutableSharedFlow<Unit>()
+    val connectedStatus = _connectedStatus.asSharedFlow()
 
 
     override fun deviceConnected() {
@@ -17,5 +17,13 @@ class ConnectDeviceViewModel : BaseTesViewModel() {
         viewModelScope.launch {
             _connectedStatus.emit(Unit)
         }
+    }
+
+    fun isDeviceConnected(): Boolean {
+        val isDeviceConnected = tesDeviceManager?.isConnected() == true
+        if (isDeviceConnected) {
+            tesDeviceManager?.shakeHands(viewModelScope = viewModelScope)
+        }
+        return isDeviceConnected
     }
 }
