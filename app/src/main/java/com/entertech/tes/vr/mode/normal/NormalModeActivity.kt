@@ -16,6 +16,7 @@ class NormalModeActivity : BaseTesActivity<NormalModeViewModel>() {
     private var btnRiseCurrent: Button? = null
     private var btnStartDevice: Button? = null
     private var btnStopDevice: Button? = null
+    private var btnTakeOffDevice: Button? = null
     private var btnStopChangeCurrent: Button? = null
     private var etTimeValue: EditText? = null
     private var tvDeviceInfo: TextView? = null
@@ -36,6 +37,7 @@ class NormalModeActivity : BaseTesActivity<NormalModeViewModel>() {
         btnStopChangeCurrent = findViewById(R.id.btnStopChangeCurrent)
         btnRiseCurrent = findViewById(R.id.btnRiseCurrent)
         btnStopDevice = findViewById(R.id.btnStopDevice)
+        btnTakeOffDevice = findViewById(R.id.btnTakeOffDevice)
         tvReceiveMsg = findViewById(R.id.tvReceiveMsg)
         switchValueMode = findViewById(R.id.switchValueMode)
         switchAutoIncreaseCurrent = findViewById(R.id.switchAutoIncreaseCurrent)
@@ -45,6 +47,7 @@ class NormalModeActivity : BaseTesActivity<NormalModeViewModel>() {
         btnStartDevice?.setOnClickListener(this)
         btnStopChangeCurrent?.setOnClickListener(this)
         btnStopDevice?.setOnClickListener(this)
+        btnTakeOffDevice?.setOnClickListener(this)
         etTimeValue = findViewById(R.id.etTimeValue)
         etCurrentValue = findViewById(R.id.etCurrentValue)
         isHex = switchValueMode?.isChecked ?: false
@@ -85,6 +88,9 @@ class NormalModeActivity : BaseTesActivity<NormalModeViewModel>() {
         when (v?.id) {
             R.id.btnStopDevice -> {
                 viewModel.stopDevice()
+            }
+            R.id.btnTakeOffDevice -> {
+                viewModel.takeOffDevice()
             }
 
             R.id.btnFallCurrent -> {

@@ -77,6 +77,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             phoneToDeviceUUid = it
         }
         requestNotificationPermission()
+        btnOK?.setOnLongClickListener {
+            btnDebug?.visibility = View.VISIBLE
+            true
+        }
     }
 
     private fun requestNotificationPermission() {

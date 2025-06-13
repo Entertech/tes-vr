@@ -35,7 +35,6 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/d16dp"
         android:layout_marginTop="@dimen/d20dp"
-        android:visibility="gone"
         android:orientation="horizontal">
 
         <Button

@@ -3,6 +3,7 @@ package com.entertech.tes.vr.mode.normal
 import androidx.lifecycle.viewModelScope
 import com.entertech.tes.ble.TesVrLog
 import com.entertech.tes.ble.device.ModeType
+import com.entertech.tes.ble.device.msg.control.ControlCommandTesMsg
 import com.entertech.tes.ble.device.msg.set.SettingArgFbTesMsg
 import com.entertech.tes.ble.device.msg.set.SettingArgFbTesMsg.Companion.SETTING_ARG_RESULT_SUCCESS
 import com.entertech.tes.ble.device.msg.upload.UploadTesFbMsg
@@ -54,7 +55,7 @@ class NormalModeViewModel : BaseTesViewModel() {
         mainHandler.postDelayed(reduceRunnable, 600)
     }
 
-    fun cancelReduceOrIncrease(){
+    fun cancelReduceOrIncrease() {
         mainHandler.removeCallbacks(reduceRunnable)
         mainHandler.removeCallbacks(increaseRunnable)
     }
@@ -92,6 +93,14 @@ class NormalModeViewModel : BaseTesViewModel() {
     fun stopDevice() {
         mainHandler.removeCallbacksAndMessages(null)
         tesDeviceManager?.stopDevice()
+    }
+
+    fun takeOffDevice() {
+        mainHandler.removeCallbacksAndMessages(null)
+        tesDeviceManager?.sendMessage(ControlCommandTesMsg(ControlCommandTesMsg.CONTROL_COMMAND_POWER_OFF),
+            needCheckStatus = false,
+            success = {},
+            failure = {})
     }
 
     override fun processSettingArgFbTesMsg(msg: SettingArgFbTesMsg) {
