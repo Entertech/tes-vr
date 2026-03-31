@@ -17,6 +17,23 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    flavorDimensions += "copyright"
+    productFlavors {
+        create("compareBrainwave") {
+            dimension = "copyright"
+            buildConfigField("boolean", "IS_COPYRIGHT", "true")
+        }
+        create("changeCurrent") {
+            dimension = "copyright"
+            buildConfigField("boolean", "IS_COPYRIGHT", "true")
+        }
+        create("no") {
+            isDefault = true
+            dimension = "copyright"
+            buildConfigField("boolean", "IS_COPYRIGHT", "false")
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
