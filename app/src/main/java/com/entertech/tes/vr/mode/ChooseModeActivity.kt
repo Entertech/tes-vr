@@ -7,17 +7,19 @@ import com.entertech.tes.vr.BaseTesActivity
 import com.entertech.tes.vr.R
 
 class ChooseModeActivity : BaseTesActivity<ChooseModeViewModel>() {
-    private var tvNormalMode:TextView?=null
-    private var tvPseudoStimulateMode:TextView?=null
+    private var tvNormalMode: TextView? = null
+    private var tvPseudoStimulateMode: TextView? = null
     private var tvBiomarkerCompareMode: TextView? = null
-
+    private var tvChangeCurrentMode: TextView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.choose_mode_activity)
-        tvNormalMode=findViewById(R.id.tvNormalMode)
-        tvPseudoStimulateMode=findViewById(R.id.tvPseudoStimulateMode)
+        tvNormalMode = findViewById(R.id.tvNormalMode)
+        tvPseudoStimulateMode = findViewById(R.id.tvPseudoStimulateMode)
+        tvChangeCurrentMode = findViewById(R.id.tvChangeCurrentMode)
         tvBiomarkerCompareMode = findViewById(R.id.tvBiomarkerCompareMode)
         tvNormalMode?.setOnClickListener(this)
+        tvChangeCurrentMode?.setOnClickListener(this)
         tvPseudoStimulateMode?.setOnClickListener(this)
         tvBiomarkerCompareMode?.setOnClickListener(this)
     }
@@ -33,6 +35,11 @@ class ChooseModeActivity : BaseTesActivity<ChooseModeViewModel>() {
             }
             tvBiomarkerCompareMode -> {
                 viewModel.startBiomarkerCompareMode(this)
+
+            }
+
+            tvChangeCurrentMode -> {
+                viewModel.startChangeCurrentMode(this)
             }
         }
     }

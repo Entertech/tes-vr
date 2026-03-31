@@ -3,6 +3,7 @@ package com.entertech.tes.vr.mode
 import android.content.Intent
 import android.widget.Toast
 import com.entertech.tes.vr.BaseTesViewModel
+import com.entertech.tes.vr.mode.change.ChangeModeActivity
 import com.entertech.tes.vr.mode.normal.NormalModeActivity
 import com.entertech.tes.vr.mode.stimulate.PseudoStimulateModeActivity
 
@@ -19,6 +20,9 @@ class ChooseModeViewModel : BaseTesViewModel() {
 
     fun startPseudoStimulateMode(activity: ChooseModeActivity) {
         activity.startActivity(Intent(activity, PseudoStimulateModeActivity::class.java))
+    }
+    fun startChangeCurrentMode(activity: ChooseModeActivity) {
+        activity.startActivity(Intent(activity, ChangeModeActivity::class.java))
     }
 
     fun startBiomarkerCompareMode(activity: ChooseModeActivity) {
