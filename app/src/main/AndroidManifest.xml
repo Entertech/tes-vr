@@ -27,9 +27,6 @@
             android:name=".mode.stimulate.PseudoStimulateModeActivity"
             android:exported="false" />
         <activity
-            android:name=".mode.biomarker.BiomarkerCompareModeActivity"
-            android:exported="false" />
-        <activity
             android:name=".control.ControlDeviceActivity"
             android:exported="false" />
         <activity

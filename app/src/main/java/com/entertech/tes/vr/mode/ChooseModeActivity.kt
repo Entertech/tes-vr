@@ -24,14 +24,14 @@ class ChooseModeActivity : BaseTesActivity<ChooseModeViewModel>() {
 
     override fun onClick(v: View?) {
         super.onClick(v)
-        when(v?.id){
-            R.id.tvNormalMode->{
+        when(v){
+            tvNormalMode -> {
                 viewModel.startNormalMode(this)
             }
-            R.id.tvPseudoStimulateMode->{
+            tvPseudoStimulateMode -> {
                 viewModel.startPseudoStimulateMode(this)
             }
-            R.id.tvBiomarkerCompareMode -> {
+            tvBiomarkerCompareMode -> {
                 viewModel.startBiomarkerCompareMode(this)
             }
         }

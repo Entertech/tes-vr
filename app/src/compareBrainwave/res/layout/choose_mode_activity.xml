@@ -40,4 +40,17 @@
         android:text="伪刺激模式"
         android:textSize="24sp"
         android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvBiomarkerCompareMode"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        android:layout_weight="1"
+        android:background="#FFE8F6EF"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="脑波前后测对比模式&#10;（3-30-3）"
+        android:textSize="22sp"
+        android:textStyle="bold" />
 </LinearLayout>
