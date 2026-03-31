@@ -57,6 +57,27 @@
       font-family: "Menlo", "Consolas", monospace;
       font-size: 13px;
     }
+    .image-placeholder {
+      width: 88%;
+      min-height: 220px;
+      margin: 14px auto 6px;
+      border: 1px dashed #666;
+      background: #fafafa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      text-indent: 0;
+      color: #666;
+      padding: 12px;
+      box-sizing: border-box;
+    }
+    .image-caption {
+      text-align: center;
+      text-indent: 0;
+      margin: 0 0 12px;
+      font-size: 13px;
+    }
   </style>
 </head>
 <body>
@@ -165,6 +186,7 @@
       </tr>
     </tbody>
   </table>
+  <p>说明：下文在适合放置软件截图的位置均已预留“图片占位符”，后续可直接替换为软件实际运行界面截图。</p>
 
   <h2>1 产品概述</h2>
 
@@ -228,6 +250,8 @@
 
   <h3>3.3 页面特点</h3>
   <p>主界面在进入业务流程前完成通知权限申请，并统一管理连接页、日志页和调试页的跳转，是应用的总入口。</p>
+  <div class="image-placeholder">图片占位符：主界面截图<br />建议展示 UUID 配置区、【确定】按钮、【日志】按钮和隐藏 Debug 入口位置</div>
+  <p class="image-caption">图3-1 主界面</p>
 
   <h2>4 设备连接</h2>
 
@@ -244,6 +268,8 @@
 
   <h3>4.3 前台服务与自动重连</h3>
   <p>为保证蓝牙连接稳定，软件在初始化设备管理器时启动前台服务 <span class="mono">TesDeviceManagerService</span>。该服务负责维护通知、监听连接状态并在异常断开时尝试按原 MAC 地址重新连接。这样可降低治疗和测量过程中因页面切换或后台运行导致的连接丢失风险。</p>
+  <div class="image-placeholder">图片占位符：设备连接界面截图<br />建议展示通过 MAC 地址连接和通过设备名称连接两个输入区域</div>
+  <p class="image-caption">图4-1 设备连接界面</p>
 
   <h2>5 模式选择</h2>
 
@@ -257,6 +283,8 @@
 
   <h3>5.2 页面跳转逻辑</h3>
   <p>用户点击不同模式入口后，页面会分别跳转至 <span class="mono">NormalModeActivity</span>、<span class="mono">PseudoStimulateModeActivity</span> 或 <span class="mono">BiomarkerCompareModeActivity</span>。该页面通过独立的 ViewModel 管理各模式业务，既共享统一设备通信能力，又保持模式间逻辑隔离。</p>
+  <div class="image-placeholder">图片占位符：模式选择界面截图<br />建议展示正常模式、伪刺激模式和脑波前后测对比模式三个入口卡片</div>
+  <p class="image-caption">图5-1 模式选择界面</p>
 
   <h2>6 正常模式</h2>
 
@@ -275,6 +303,8 @@
   <h3>6.3 实现特点</h3>
   <p>正常模式通过 <span class="mono">NormalModeViewModel</span> 调用设备启动、停止和调流接口，并利用主线程 <span class="mono">Handler</span> 以 600 毫秒为间隔持续发送升流或降流命令。系统在接收到设备上报后，会根据当前电流值自动停止重复升流或降流，避免超过上限或低于下限。</p>
   <p>页面展示的设备信息包括当前模式、设定电流、设定时间、频率、剩余时间、阻抗值、当前电流、运行状态、电池电量和停止标记等关键参数，可用于观察设备运行效果。</p>
+  <div class="image-placeholder">图片占位符：正常模式界面截图<br />建议展示启动设备、停止设备、关机、电流升降以及设备状态信息区域</div>
+  <p class="image-caption">图6-1 正常模式界面</p>
 
   <h2>7 伪刺激模式</h2>
 
@@ -290,6 +320,8 @@
 
   <h3>7.3 实现特点</h3>
   <p>伪刺激模式通过 <span class="mono">PseudoStimulateModeViewModel</span> 监听设备反馈消息，区分开始伪刺激和停止伪刺激的执行结果，并将日志信息输出到统一的消息处理机制中。</p>
+  <div class="image-placeholder">图片占位符：伪刺激模式界面截图<br />建议展示【开始伪刺激】、【结束伪刺激】按钮及设备消息区域</div>
+  <p class="image-caption">图7-1 伪刺激模式界面</p>
 
   <h2>8 脑波前后测对比模式</h2>
 
@@ -298,6 +330,8 @@
 
   <h3>8.2 页面组成</h3>
   <p>该模式页面由流程提示区、接收消息区、设备状态区、四个步骤状态区以及六个功能按钮组成。按钮分别对应前测脑波采集、开始电流刺激、后测脑波采集、执行前后测数据对比、一键流程触发和状态重置。</p>
+  <div class="image-placeholder">图片占位符：脑波前后测对比模式主界面截图<br />建议展示流程提示、四个步骤状态文本和六个流程按钮</div>
+  <p class="image-caption">图8-1 脑波前后测对比模式界面</p>
 
   <h3>8.3 流程管理</h3>
   <p><span class="mono">BiomarkerCompareModeViewModel</span> 使用状态流保存整个流程的展示状态，默认流程配置为前测 3 分钟、刺激 30 分钟、后测 3 分钟，并支持通过 <span class="mono">BiomarkerProcessConfig</span> 扩展配置受试对象编号和流程时长。</p>
@@ -310,6 +344,8 @@
     <li>点击【一键触发流程接口（占位）】更新流程提示，保留一键化流程入口。</li>
     <li>点击【重置状态】恢复默认步骤文案和默认流程时长。</li>
   </ol>
+  <div class="image-placeholder">图片占位符：脑波前后测流程执行状态截图<br />建议展示前测、刺激、后测、对比四个状态项在执行中的界面效果</div>
+  <p class="image-caption">图8-2 脑波前后测流程状态界面</p>
 
   <h3>8.4 接口契约</h3>
   <p>该模式定义了统一的流程网关接口 <span class="mono">BiomarkerModeGateway</span>，其中包含前测采集、刺激执行、后测采集和前后测对比四个方法。若当前页面未绑定具体网关实现，界面会显示“接口未接入，等待算法与设备层实现”，明确提示该步骤已完成流程占位但尚未接入实际采集或分析能力。</p>
@@ -340,10 +376,14 @@
 
   <h3>9.1 日志查看</h3>
   <p>主界面点击【日志】可进入日志文件列表页。该页面会优先展示应用外部文件目录中的文件与目录，并支持逐级浏览。若点击文件，将调用系统文本查看能力打开文件；若长按文件，可直接分享文件；若长按目录，系统会自动压缩为 ZIP 文件并发起分享。</p>
+  <div class="image-placeholder">图片占位符：日志文件列表界面截图<br />建议展示日志目录列表、文件项和长按分享相关操作区域</div>
+  <p class="image-caption">图9-1 日志查看界面</p>
 
   <h3>9.2 调试控制</h3>
   <p>长按主界面的【确定】按钮后可显示隐藏的【Debug】按钮。调试页提供连接设备、开始伪刺激、停止伪刺激、设备启动、设备停止、关机、增加电流、减少电流等调试操作，同时记录日志输出，便于研发人员验证设备协议和排查通信问题。</p>
   <p>调试页与业务模式页共用统一的设备通信基座，因此日志、连接状态和设备反馈信息的来源保持一致，可作为核心业务流程的补充排障工具。</p>
+  <div class="image-placeholder">图片占位符：Debug 调试界面截图<br />建议展示连接设备、设备启动、伪刺激控制、调流按钮和日志输出区域</div>
+  <p class="image-caption">图9-2 Debug 调试界面</p>
 
   <h2>10 常见问题</h2>
 
