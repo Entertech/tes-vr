@@ -15,7 +15,7 @@ class ChangeModeActivity : BaseTesActivity<ChangeModeViewModel>() {
     private var tvReceiveMsg: TextView? = null
 
     override fun getActivityLayoutResId(): Int {
-        return R.layout.mode_pseudo_stimulate_activity
+        return R.layout.mode_auto_change_current_activity
     }
 
     override fun initActivityView() {

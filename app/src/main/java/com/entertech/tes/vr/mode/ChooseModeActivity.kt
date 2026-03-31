@@ -35,7 +35,6 @@ class ChooseModeActivity : BaseTesActivity<ChooseModeViewModel>() {
             }
             tvBiomarkerCompareMode -> {
                 viewModel.startBiomarkerCompareMode(this)
-
             }
 
             tvChangeCurrentMode -> {
