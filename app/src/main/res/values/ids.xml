@@ -2,4 +2,6 @@
 <resources>
     <item name="tvBiomarkerCompareMode" type="id" />
     <item name="tvChangeCurrentMode" type="id" />
+    <item name="tvPseudoStimulateMode" type="id" />
+    <item name="tvNormalMode" type="id" />
 </resources>

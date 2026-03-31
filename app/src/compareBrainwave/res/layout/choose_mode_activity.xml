@@ -5,40 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
-    tools:context=".mode.ChooseModeActivity">
+    android:padding="16dp">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="请选择运行模式"
         android:textSize="22sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/tvNormalMode"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        android:layout_weight="1"
-        android:background="#FFF2F4F7"
-        android:gravity="center"
-        android:padding="16dp"
-        android:text="正常模式"
-        android:textSize="24sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/tvPseudoStimulateMode"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="12dp"
-        android:layout_weight="1"
-        android:background="#FFF2F4F7"
-        android:gravity="center"
-        android:padding="16dp"
-        android:text="伪刺激模式"
-        android:textSize="24sp"
         android:textStyle="bold" />
 
     <TextView

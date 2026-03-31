@@ -1,10 +1,7 @@
 package com.entertech.tes.vr.mode
 
 import android.content.Intent
-import android.widget.Toast
 import com.entertech.tes.vr.BaseTesViewModel
-import com.entertech.tes.vr.mode.normal.NormalModeActivity
-import com.entertech.tes.vr.mode.stimulate.PseudoStimulateModeActivity
 
 class ChooseModeViewModel : BaseTesViewModel() {
 
@@ -13,31 +10,34 @@ class ChooseModeViewModel : BaseTesViewModel() {
             "com.entertech.tes.vr.mode.biomarker.BiomarkerCompareModeActivity"
         private const val CHANGE_CURRENT_MODE_ACTIVITY =
             "com.entertech.tes.vr.mode.change.ChangeModeActivity"
+        private const val NORMAL_MODE_ACTIVITY =
+            "om.entertech.tes.vr.mode.normal.NormalModeActivity"
+        private const val PSEUDO_STIMULATE_MODE_ACTIVITY =
+            "com.entertech.tes.vr.mode.stimulate.PseudoStimulateModeActivity"
     }
 
     fun startNormalMode(activity: ChooseModeActivity) {
-        activity.startActivity(Intent(activity, NormalModeActivity::class.java))
+        gotoOtherActivityByActivityPath(activity, NORMAL_MODE_ACTIVITY)
     }
 
     fun startPseudoStimulateMode(activity: ChooseModeActivity) {
-        activity.startActivity(Intent(activity, PseudoStimulateModeActivity::class.java))
+        gotoOtherActivityByActivityPath(activity, PSEUDO_STIMULATE_MODE_ACTIVITY)
     }
 
     fun startChangeCurrentMode(activity: ChooseModeActivity) {
-        val intent = Intent().setClassName(activity, CHANGE_CURRENT_MODE_ACTIVITY)
-        if (intent.resolveActivity(activity.packageManager) == null) {
-            Toast.makeText(activity, "当前变种未启用动态改变电流模式", Toast.LENGTH_SHORT).show()
-            return
+        gotoOtherActivityByActivityPath(activity, CHANGE_CURRENT_MODE_ACTIVITY)
+    }
+
+    private fun gotoOtherActivityByActivityPath(
+        activity: ChooseModeActivity, activityPath: String
+    ) {
+        val intent = Intent().setClassName(activity, activityPath)
+        if (intent.resolveActivity(activity.packageManager) != null) {
+            activity.startActivity(intent)
         }
-        activity.startActivity(intent)
     }
 
     fun startBiomarkerCompareMode(activity: ChooseModeActivity) {
-        val intent = Intent().setClassName(activity, BIOMARKER_COMPARE_MODE_ACTIVITY)
-        if (intent.resolveActivity(activity.packageManager) == null) {
-            Toast.makeText(activity, "当前变种未启用脑波前后测对比模式", Toast.LENGTH_SHORT).show()
-            return
-        }
-        activity.startActivity(intent)
+        gotoOtherActivityByActivityPath(activity, BIOMARKER_COMPARE_MODE_ACTIVITY)
     }
 }

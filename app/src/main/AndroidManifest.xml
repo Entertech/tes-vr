@@ -20,12 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Tesvr"
         tools:targetApi="31" >
-        <activity
-            android:name=".mode.normal.NormalModeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".mode.stimulate.PseudoStimulateModeActivity"
-            android:exported="false" />
+
         <activity
             android:name=".control.ControlDeviceActivity"
             android:exported="false" />
