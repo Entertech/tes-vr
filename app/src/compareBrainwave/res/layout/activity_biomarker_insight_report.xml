@@ -783,14 +783,24 @@
         </com.google.android.material.card.MaterialCardView>
 
         <Button
-            android:id="@+id/btnCloseReport"
+            android:id="@+id/btnOpenTrendFromReport"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp"
+            android:backgroundTint="@color/compare_trend_header_end"
+            android:paddingVertical="14dp"
+            android:text="继续查看疗程趋势总览"
+            android:textColor="@color/compare_report_white" />
+
+        <Button
+            android:id="@+id/btnCloseReport"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="20dp"
             android:backgroundTint="@color/compare_report_progress_after"
             android:paddingVertical="14dp"
-            android:text="返回对比流程"
+            android:text="返回疗程流程"
             android:textColor="@color/compare_report_white" />
     </LinearLayout>
 </ScrollView>

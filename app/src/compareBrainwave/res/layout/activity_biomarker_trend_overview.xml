@@ -535,14 +535,24 @@
         </com.google.android.material.card.MaterialCardView>
 
         <Button
-            android:id="@+id/btnCloseTrend"
+            android:id="@+id/btnRestartFromPrecheck"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp"
+            android:backgroundTint="@color/compare_precheck_header_end"
+            android:paddingVertical="14dp"
+            android:text="重新开始下一次疗程（回到预检）"
+            android:textColor="@color/compare_report_white" />
+
+        <Button
+            android:id="@+id/btnCloseTrend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="20dp"
             android:backgroundTint="@color/compare_trend_header_end"
             android:paddingVertical="14dp"
-            android:text="返回流程页"
+            android:text="返回单次报告"
             android:textColor="@color/compare_report_white" />
     </LinearLayout>
 </ScrollView>

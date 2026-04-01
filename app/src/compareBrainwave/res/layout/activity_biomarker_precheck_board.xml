@@ -524,14 +524,24 @@
         </com.google.android.material.card.MaterialCardView>
 
         <Button
-            android:id="@+id/btnClosePrecheck"
+            android:id="@+id/btnGoToProcessFlow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp"
-            android:layout_marginBottom="20dp"
             android:backgroundTint="@color/compare_precheck_header_end"
             android:paddingVertical="14dp"
-            android:text="返回流程页"
+            android:text="通过预检并进入疗程流程"
             android:textColor="@color/compare_report_white" />
+
+        <Button
+            android:id="@+id/btnClosePrecheck"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="#D8E0E4"
+            android:paddingVertical="14dp"
+            android:text="返回模式选择"
+            android:textColor="#334B57" />
     </LinearLayout>
 </ScrollView>
