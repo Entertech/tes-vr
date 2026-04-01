@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="compare_report_background">#F4F7F6</color>
+    <color name="compare_report_surface">#FFFFFFFF</color>
+    <color name="compare_report_white">#FFFFFFFF</color>
+    <color name="compare_report_header_start">#0F5F69</color>
+    <color name="compare_report_header_end">#1F9D80</color>
+    <color name="compare_report_header_caption">#BFE7DD</color>
+    <color name="compare_report_header_body">#E7F7F2</color>
+    <color name="compare_report_text_primary">#163238</color>
+    <color name="compare_report_text_secondary">#5C7075</color>
+    <color name="compare_report_text_muted">#87969A</color>
+    <color name="compare_report_stroke">#D9E5E3</color>
+    <color name="compare_report_positive">#1A946B</color>
+    <color name="compare_report_accent_warm">#C9792B</color>
+    <color name="compare_report_progress_track">#E6EFEE</color>
+    <color name="compare_report_progress_before">#AAB7C1</color>
+    <color name="compare_report_progress_after">#1D7D74</color>
+    <color name="compare_report_chip_green_bg">#E2F5EC</color>
+    <color name="compare_report_chip_green_text">#0F7C56</color>
+    <color name="compare_report_chip_amber_bg">#FCEEDC</color>
+    <color name="compare_report_chip_amber_text">#A76618</color>
+    <color name="compare_report_chip_blue_bg">#E5EFF8</color>
+    <color name="compare_report_chip_blue_text">#35608A</color>
+</resources>

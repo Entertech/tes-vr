@@ -1,5 +1,6 @@
 package com.entertech.tes.vr.mode.biomarker
 
+import android.content.Intent
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
@@ -22,6 +23,7 @@ class BiomarkerCompareModeActivity : BaseTesActivity<BiomarkerCompareModeViewMod
     private var btnStartStimulation: Button? = null
     private var btnCollectPostEeg: Button? = null
     private var btnCompareData: Button? = null
+    private var btnOpenInsightReport: Button? = null
     private var btnRunFullProcess: Button? = null
     private var btnResetProcessState: Button? = null
 
@@ -42,6 +44,7 @@ class BiomarkerCompareModeActivity : BaseTesActivity<BiomarkerCompareModeViewMod
         btnStartStimulation = findViewById(R.id.btnStartStimulation)
         btnCollectPostEeg = findViewById(R.id.btnCollectPostEeg)
         btnCompareData = findViewById(R.id.btnCompareData)
+        btnOpenInsightReport = findViewById(R.id.btnOpenInsightReport)
         btnRunFullProcess = findViewById(R.id.btnRunFullProcess)
         btnResetProcessState = findViewById(R.id.btnResetProcessState)
 
@@ -49,6 +52,7 @@ class BiomarkerCompareModeActivity : BaseTesActivity<BiomarkerCompareModeViewMod
         btnStartStimulation?.setOnClickListener(this)
         btnCollectPostEeg?.setOnClickListener(this)
         btnCompareData?.setOnClickListener(this)
+        btnOpenInsightReport?.setOnClickListener(this)
         btnRunFullProcess?.setOnClickListener(this)
         btnResetProcessState?.setOnClickListener(this)
     }
@@ -99,6 +103,10 @@ class BiomarkerCompareModeActivity : BaseTesActivity<BiomarkerCompareModeViewMod
 
             R.id.btnCompareData -> {
                 viewModel.requestCompare()
+            }
+
+            R.id.btnOpenInsightReport -> {
+                startActivity(Intent(this, BiomarkerInsightReportActivity::class.java))
             }
 
             R.id.btnRunFullProcess -> {

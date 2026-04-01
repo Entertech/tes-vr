@@ -3,6 +3,9 @@
 
     <application>
         <activity
+            android:name=".mode.biomarker.BiomarkerInsightReportActivity"
+            android:exported="false" />
+        <activity
             android:name=".mode.biomarker.BiomarkerCompareModeActivity"
             android:exported="false" />
     </application>
