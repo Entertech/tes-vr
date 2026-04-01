@@ -3,6 +3,12 @@
 
     <application>
         <activity
+            android:name=".mode.biomarker.BiomarkerTrendOverviewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".mode.biomarker.BiomarkerPrecheckBoardActivity"
+            android:exported="false" />
+        <activity
             android:name=".mode.biomarker.BiomarkerInsightReportActivity"
             android:exported="false" />
         <activity

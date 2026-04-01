@@ -22,4 +22,10 @@
     <color name="compare_report_chip_amber_text">#A76618</color>
     <color name="compare_report_chip_blue_bg">#E5EFF8</color>
     <color name="compare_report_chip_blue_text">#35608A</color>
+    <color name="compare_precheck_header_start">#7C5424</color>
+    <color name="compare_precheck_header_end">#C58B37</color>
+    <color name="compare_trend_header_start">#264C83</color>
+    <color name="compare_trend_header_end">#3D8DA6</color>
+    <color name="compare_bar_mid">#6D9CC7</color>
+    <color name="compare_bar_peak">#3D8DA6</color>
 </resources>

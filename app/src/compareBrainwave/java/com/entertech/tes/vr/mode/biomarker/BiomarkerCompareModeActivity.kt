@@ -23,7 +23,9 @@ class BiomarkerCompareModeActivity : BaseTesActivity<BiomarkerCompareModeViewMod
     private var btnStartStimulation: Button? = null
     private var btnCollectPostEeg: Button? = null
     private var btnCompareData: Button? = null
+    private var btnOpenPrecheckBoard: Button? = null
     private var btnOpenInsightReport: Button? = null
+    private var btnOpenTrendOverview: Button? = null
     private var btnRunFullProcess: Button? = null
     private var btnResetProcessState: Button? = null
 
@@ -44,7 +46,9 @@ class BiomarkerCompareModeActivity : BaseTesActivity<BiomarkerCompareModeViewMod
         btnStartStimulation = findViewById(R.id.btnStartStimulation)
         btnCollectPostEeg = findViewById(R.id.btnCollectPostEeg)
         btnCompareData = findViewById(R.id.btnCompareData)
+        btnOpenPrecheckBoard = findViewById(R.id.btnOpenPrecheckBoard)
         btnOpenInsightReport = findViewById(R.id.btnOpenInsightReport)
+        btnOpenTrendOverview = findViewById(R.id.btnOpenTrendOverview)
         btnRunFullProcess = findViewById(R.id.btnRunFullProcess)
         btnResetProcessState = findViewById(R.id.btnResetProcessState)
 
@@ -52,7 +56,9 @@ class BiomarkerCompareModeActivity : BaseTesActivity<BiomarkerCompareModeViewMod
         btnStartStimulation?.setOnClickListener(this)
         btnCollectPostEeg?.setOnClickListener(this)
         btnCompareData?.setOnClickListener(this)
+        btnOpenPrecheckBoard?.setOnClickListener(this)
         btnOpenInsightReport?.setOnClickListener(this)
+        btnOpenTrendOverview?.setOnClickListener(this)
         btnRunFullProcess?.setOnClickListener(this)
         btnResetProcessState?.setOnClickListener(this)
     }
@@ -105,8 +111,16 @@ class BiomarkerCompareModeActivity : BaseTesActivity<BiomarkerCompareModeViewMod
                 viewModel.requestCompare()
             }
 
+            R.id.btnOpenPrecheckBoard -> {
+                startActivity(Intent(this, BiomarkerPrecheckBoardActivity::class.java))
+            }
+
             R.id.btnOpenInsightReport -> {
                 startActivity(Intent(this, BiomarkerInsightReportActivity::class.java))
+            }
+
+            R.id.btnOpenTrendOverview -> {
+                startActivity(Intent(this, BiomarkerTrendOverviewActivity::class.java))
             }
 
             R.id.btnRunFullProcess -> {

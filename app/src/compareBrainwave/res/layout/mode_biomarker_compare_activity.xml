@@ -104,6 +104,15 @@
             android:text="执行前后测数据对比" />
 
         <Button
+            android:id="@+id/btnOpenPrecheckBoard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="#F3E5C9"
+            android:text="查看采集前预检面板（UI示例）"
+            android:textColor="#7A531E" />
+
+        <Button
             android:id="@+id/btnOpenInsightReport"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -111,6 +120,15 @@
             android:backgroundTint="#DCEFE7"
             android:text="查看脑波洞察报告（UI示例）"
             android:textColor="#165C4A" />
+
+        <Button
+            android:id="@+id/btnOpenTrendOverview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="#DDE8F4"
+            android:text="查看疗程趋势总览（UI示例）"
+            android:textColor="#224E7C" />
 
         <Button
             android:id="@+id/btnRunFullProcess"
