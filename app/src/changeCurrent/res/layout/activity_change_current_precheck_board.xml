@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/change_current_background"
     android:fillViewport="true"
-    tools:context=".mode.change.ChangeModeActivity">
+    tools:context=".mode.change.ChangeCurrentPrecheckBoardActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,14 +24,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_change_current_process_header"
+                android:background="@drawable/bg_change_current_precheck_header"
                 android:orientation="vertical"
                 android:padding="24dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Adaptive Session"
+                    android:text="Session Ready Check"
                     android:textColor="@color/change_current_header_caption"
                     android:textSize="12sp" />
 
@@ -39,17 +39,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="动态电流执行流程"
+                    android:text="动态电流疗程前预检"
                     android:textColor="@color/change_current_white"
                     android:textSize="28sp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tvProcessHint"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:text="流程：疗程前预检 -> 动态电流执行 -> 单次疗程报告 -> 长周期趋势复盘"
+                    android:layout_marginTop="10dp"
+                    android:text="当前页面用于疗程开始前 2-3 分钟的人工复核，仅展示 UI 结构，不接入真实检查数据。"
                     android:textColor="@color/change_current_header_body"
                     android:textSize="14sp" />
 
@@ -67,7 +66,7 @@
                         android:paddingTop="8dp"
                         android:paddingRight="14dp"
                         android:paddingBottom="8dp"
-                        android:text="设备联调"
+                        android:text="受试者已签到"
                         android:textColor="@color/change_current_chip_blue_text"
                         android:textSize="12sp"
                         android:textStyle="bold" />
@@ -81,7 +80,7 @@
                         android:paddingTop="8dp"
                         android:paddingRight="14dp"
                         android:paddingBottom="8dp"
-                        android:text="算法占位"
+                        android:text="参数待复核"
                         android:textColor="@color/change_current_chip_amber_text"
                         android:textSize="12sp"
                         android:textStyle="bold" />
@@ -89,6 +88,101 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="@color/change_current_surface"
+                app:cardCornerRadius="22dp"
+                app:cardElevation="0dp"
+                app:strokeColor="@color/change_current_stroke"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="128dp"
+                    android:orientation="vertical"
+                    android:padding="18dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="电极接触"
+                        android:textColor="@color/change_current_text_secondary"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="94%"
+                        android:textColor="@color/change_current_text_primary"
+                        android:textSize="30sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="贴片接触稳定"
+                        android:textColor="@color/change_current_positive"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="@color/change_current_surface"
+                app:cardCornerRadius="22dp"
+                app:cardElevation="0dp"
+                app:strokeColor="@color/change_current_stroke"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="128dp"
+                    android:orientation="vertical"
+                    android:padding="18dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="目标电流窗"
+                        android:textColor="@color/change_current_text_secondary"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="0.8 - 1.4 mA"
+                        android:textColor="@color/change_current_text_primary"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="允许微调范围已载入"
+                        android:textColor="@color/change_current_accent"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -108,158 +202,62 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="设备实时信息"
+                    android:text="本次疗程确认项"
                     android:textColor="@color/change_current_text_primary"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tvReceiveMsg"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:text="接受到的消息："
-                    android:textColor="@color/change_current_text_secondary"
-                    android:textSize="13sp" />
-
-                <TextView
-                    android:id="@+id/tvDeviceInfo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="设备状态：等待设备连接"
-                    android:textColor="@color/change_current_text_primary"
-                    android:textSize="14sp" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:cardBackgroundColor="@color/change_current_surface"
-            app:cardCornerRadius="24dp"
-            app:cardElevation="0dp"
-            app:strokeColor="@color/change_current_stroke"
-            app:strokeWidth="1dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="20dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="流程状态"
-                    android:textColor="@color/change_current_text_primary"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tvReadinessStatus"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="14dp"
-                    android:text="设备与电极：待确认"
+                    android:text="1. 受试者状态平稳，已完成问询。"
                     android:textColor="@color/change_current_text_primary"
-                    android:textSize="15sp" />
+                    android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/tvStrategyStatus"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="调节策略：待下发"
+                    android:text="2. 设备电量、贴片接触和阻抗提示均在可执行范围。"
                     android:textColor="@color/change_current_text_primary"
-                    android:textSize="15sp" />
+                    android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/tvStimulationStatus"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="动态电流：待启动"
+                    android:text="3. 动态调节模板已选择“缓升-维持-微调”策略。"
                     android:textColor="@color/change_current_text_primary"
-                    android:textSize="15sp" />
+                    android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/tvSafetyStatus"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="安全监测：等待设备连接与参数确认"
-                    android:textColor="@color/change_current_text_primary"
-                    android:textSize="15sp" />
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/bg_change_current_chip_green"
+                    android:padding="16dp"
+                    android:text="提示：当前为 UI 占位页，参数文字仅用于演示布局结构。"
+                    android:textColor="@color/change_current_chip_green_text"
+                    android:textSize="13sp" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
         <Button
-            android:id="@+id/btnMarkDeviceReady"
+            android:id="@+id/btnGoToChangeProcess"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="18dp"
             android:backgroundTint="@color/change_current_primary"
-            android:text="标记预检完成"
+            android:text="进入动态电流流程"
             android:textColor="@color/change_current_white" />
 
         <Button
-            android:id="@+id/btnSimulateStrategyRefresh"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:backgroundTint="@color/change_current_secondary"
-            android:text="刷新调节策略（UI 占位）"
-            android:textColor="@color/change_current_white" />
-
-        <Button
-            android:id="@+id/btnStartChangeMode"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="开始动态电流" />
-
-        <Button
-            android:id="@+id/btnStopChangeMode"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="停止动态电流" />
-
-        <Button
-            android:id="@+id/btnOpenPrecheckBoard"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:backgroundTint="@color/change_current_light_blue"
-            android:text="返回疗程前预检"
-            android:textColor="@color/change_current_chip_blue_text" />
-
-        <Button
-            android:id="@+id/btnOpenInsightReport"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:backgroundTint="@color/change_current_light_green"
-            android:text="查看单次疗程报告"
-            android:textColor="@color/change_current_positive" />
-
-        <Button
-            android:id="@+id/btnOpenTrendOverview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:backgroundTint="@color/change_current_light_amber"
-            android:text="查看趋势总览"
-            android:textColor="@color/change_current_chip_amber_text" />
-
-        <Button
-            android:id="@+id/btnResetProcessState"
+            android:id="@+id/btnClosePrecheck"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="16dp"
-            android:text="重置页面状态" />
+            android:text="关闭预检页" />
     </LinearLayout>
 </ScrollView>

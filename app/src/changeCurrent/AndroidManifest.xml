@@ -3,6 +3,15 @@
 
     <application>
         <activity
+            android:name=".mode.change.ChangeCurrentTrendOverviewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".mode.change.ChangeCurrentInsightReportActivity"
+            android:exported="false" />
+        <activity
+            android:name=".mode.change.ChangeCurrentPrecheckBoardActivity"
+            android:exported="false" />
+        <activity
             android:name=".mode.change.ChangeModeActivity"
             android:exported="false" />
     </application>

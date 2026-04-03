@@ -9,7 +9,7 @@ class ChooseModeViewModel : BaseTesViewModel() {
         private const val BIOMARKER_COMPARE_MODE_ACTIVITY =
             "com.entertech.tes.vr.mode.biomarker.BiomarkerPrecheckBoardActivity"
         private const val CHANGE_CURRENT_MODE_ACTIVITY =
-            "com.entertech.tes.vr.mode.change.ChangeModeActivity"
+            "com.entertech.tes.vr.mode.change.ChangeCurrentPrecheckBoardActivity"
         private const val NORMAL_MODE_ACTIVITY =
             "om.entertech.tes.vr.mode.normal.NormalModeActivity"
         private const val PSEUDO_STIMULATE_MODE_ACTIVITY =
