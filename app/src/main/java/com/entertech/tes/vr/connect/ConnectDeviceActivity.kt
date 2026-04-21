@@ -63,7 +63,7 @@ class ConnectDeviceActivity : BaseTesActivity<ConnectDeviceViewModel>() {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.btnConnectDeviceByMac -> {
-                if (!viewModel.isDeviceConnected()) {
+                if (viewModel.isDeviceConnected()) {
                     val intent1 = Intent(this@ConnectDeviceActivity, ChooseModeActivity::class.java)
                     intent1.putExtras(intent)
                     startActivity(intent1)
@@ -78,6 +78,12 @@ class ConnectDeviceActivity : BaseTesActivity<ConnectDeviceViewModel>() {
             }
 
             R.id.btnConnectDeviceByName -> {
+                if (viewModel.isDeviceConnected()) {
+                    val intent1 = Intent(this@ConnectDeviceActivity, ChooseModeActivity::class.java)
+                    intent1.putExtras(intent)
+                    startActivity(intent1)
+                    return
+                }
                 val name = etDeviceName?.text.toString()
                 lifecycleScope.launch {
                     viewModel.saveToStringDataStore(this@ConnectDeviceActivity, "device_name", name)

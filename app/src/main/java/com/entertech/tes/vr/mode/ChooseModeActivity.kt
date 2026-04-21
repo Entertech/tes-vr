@@ -11,6 +11,7 @@ class ChooseModeActivity : BaseTesActivity<ChooseModeViewModel>() {
     private var tvPseudoStimulateMode: TextView? = null
     private var tvBiomarkerCompareMode: TextView? = null
     private var tvChangeCurrentMode: TextView? = null
+    private var tvVrMbctMode: TextView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.choose_mode_activity)
@@ -18,10 +19,12 @@ class ChooseModeActivity : BaseTesActivity<ChooseModeViewModel>() {
         tvPseudoStimulateMode = findViewById(R.id.tvPseudoStimulateMode)
         tvChangeCurrentMode = findViewById(R.id.tvChangeCurrentMode)
         tvBiomarkerCompareMode = findViewById(R.id.tvBiomarkerCompareMode)
+        tvVrMbctMode = findViewById(R.id.tvVrMbctMode)
         tvNormalMode?.setOnClickListener(this)
         tvChangeCurrentMode?.setOnClickListener(this)
         tvPseudoStimulateMode?.setOnClickListener(this)
         tvBiomarkerCompareMode?.setOnClickListener(this)
+        tvVrMbctMode?.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
@@ -39,6 +42,10 @@ class ChooseModeActivity : BaseTesActivity<ChooseModeViewModel>() {
 
             tvChangeCurrentMode -> {
                 viewModel.startChangeCurrentMode(this)
+            }
+
+            tvVrMbctMode -> {
+                viewModel.startVrMbctMode(this)
             }
         }
     }

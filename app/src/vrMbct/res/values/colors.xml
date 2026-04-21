@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="vr_mbct_background">#FFF4F0E8</color>
+    <color name="vr_mbct_surface">#FFFFFCF6</color>
+    <color name="vr_mbct_stroke">#FFD7CEBF</color>
+    <color name="vr_mbct_header">#FF1F5C5A</color>
+    <color name="vr_mbct_header_caption">#FFBEE5D7</color>
+    <color name="vr_mbct_header_body">#FFE0F0EA</color>
+    <color name="vr_mbct_text_primary">#FF213331</color>
+    <color name="vr_mbct_text_secondary">#FF60726D</color>
+    <color name="vr_mbct_accent">#FFB56B38</color>
+    <color name="vr_mbct_button">#FF2F6A67</color>
+    <color name="vr_mbct_button_secondary">#FFE7DDD0</color>
+    <color name="vr_mbct_white">#FFFFFFFF</color>
+</resources>

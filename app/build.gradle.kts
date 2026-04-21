@@ -27,6 +27,10 @@ android {
             dimension = "copyright"
             buildConfigField("boolean", "IS_COPYRIGHT", "true")
         }
+        create("vrMbct") {
+            dimension = "copyright"
+            buildConfigField("boolean", "IS_COPYRIGHT", "true")
+        }
         create("no") {
             isDefault = true
             dimension = "copyright"

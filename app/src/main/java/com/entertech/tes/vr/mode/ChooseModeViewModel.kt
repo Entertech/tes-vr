@@ -11,9 +11,11 @@ class ChooseModeViewModel : BaseTesViewModel() {
         private const val CHANGE_CURRENT_MODE_ACTIVITY =
             "com.entertech.tes.vr.mode.change.ChangeCurrentPrecheckBoardActivity"
         private const val NORMAL_MODE_ACTIVITY =
-            "om.entertech.tes.vr.mode.normal.NormalModeActivity"
+            "com.entertech.tes.vr.mode.normal.NormalModeActivity"
         private const val PSEUDO_STIMULATE_MODE_ACTIVITY =
             "com.entertech.tes.vr.mode.stimulate.PseudoStimulateModeActivity"
+        private const val VR_MBCT_MODE_ACTIVITY =
+            "com.entertech.tes.vr.mode.mbct.MbctPrepareActivity"
     }
 
     fun startNormalMode(activity: ChooseModeActivity) {
@@ -26,6 +28,10 @@ class ChooseModeViewModel : BaseTesViewModel() {
 
     fun startChangeCurrentMode(activity: ChooseModeActivity) {
         gotoOtherActivityByActivityPath(activity, CHANGE_CURRENT_MODE_ACTIVITY)
+    }
+
+    fun startVrMbctMode(activity: ChooseModeActivity) {
+        gotoOtherActivityByActivityPath(activity, VR_MBCT_MODE_ACTIVITY)
     }
 
     private fun gotoOtherActivityByActivityPath(
