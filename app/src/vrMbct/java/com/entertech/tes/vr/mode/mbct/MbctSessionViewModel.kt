@@ -28,7 +28,7 @@ class MbctSessionViewModel : BaseTesViewModel() {
         val selectedCourse: String = "未选择课程",
         val stimulationStatus: String = "刺激状态：待开始",
         val postGuideStatus: String = "末次引导与脑电采集：待执行",
-        val countdownText: String = "03:00",
+        val countdownText: String = "30:00",
         val recordStatus: String = "数据文件：待创建",
         val sessionStatus: String = "会话状态：等待课程执行"
     )
@@ -59,6 +59,9 @@ class MbctSessionViewModel : BaseTesViewModel() {
             selectedCourse = selectedCourse?.let {
                 "${it.title} (${it.stimulationMinutes}min)"
             } ?: "课程不存在",
+            countdownText = selectedCourse?.let {
+                formatCountdown(it.stimulationMinutes * 60)
+            } ?: MbctSessionUiState().countdownText,
             recordStatus = filePath,
             sessionStatus = "会话状态：已进入疗程执行页"
         )
@@ -73,6 +76,7 @@ class MbctSessionViewModel : BaseTesViewModel() {
         postGuideStarted = false
         _uiState.value = _uiState.value.copy(
             stimulationStatus = "刺激状态：已发送启动请求，课程 ${course.title}",
+            countdownText = formatCountdown(course.stimulationMinutes * 60),
             sessionStatus = "会话状态：等待设备启动正常模式刺激"
         )
         appendSessionRecord(
@@ -110,6 +114,7 @@ class MbctSessionViewModel : BaseTesViewModel() {
         if (SETTING_ARG_RESULT_SUCCESS == msg.setArgResult) {
             _uiState.value = _uiState.value.copy(
                 stimulationStatus = "刺激状态：${course.title} 正在进行，剩余时长将随设备上报刷新",
+                countdownText = formatCountdown(course.stimulationMinutes * 60),
                 sessionStatus = "会话状态：正常模式刺激中"
             )
             appendSessionRecord(
@@ -144,6 +149,7 @@ class MbctSessionViewModel : BaseTesViewModel() {
         if (!postGuideStarted) {
             _uiState.value = _uiState.value.copy(
                 stimulationStatus = "刺激状态：${course.title} 进行中，设备剩余 ${msg.stimulateRemainTime}s",
+                countdownText = formatCountdown(msg.stimulateRemainTime.coerceAtLeast(0)),
                 sessionStatus = "会话状态：刺激执行中，等待结束"
             )
         }
@@ -210,6 +216,7 @@ class MbctSessionViewModel : BaseTesViewModel() {
         )
         _uiState.value = _uiState.value.copy(
             postGuideStatus = "末次引导与脑电采集：进行中",
+            countdownText = formatCountdown(POST_GUIDE_DURATION_SECONDS),
             sessionStatus = "会话状态：进入疗程后 3min 引导采集"
         )
         postGuideJob?.cancel()
