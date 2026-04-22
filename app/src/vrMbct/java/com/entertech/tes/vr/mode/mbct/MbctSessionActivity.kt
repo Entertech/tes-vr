@@ -79,6 +79,10 @@ class MbctSessionActivity : BaseTesActivity<MbctSessionViewModel>() {
                 tvCountdown?.text = state.countdownText
                 tvRecordStatus?.text = state.recordStatus
                 tvSessionStatus?.text = state.sessionStatus
+                btnStartStimulation?.isEnabled = state.startButtonEnabled
+                btnStopStimulation?.isEnabled = state.stopButtonEnabled
+                btnStartStimulation?.alpha = if (state.startButtonEnabled) 1f else 0.5f
+                btnStopStimulation?.alpha = if (state.stopButtonEnabled) 1f else 0.5f
             }
         }
 
