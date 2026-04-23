@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/vr_mbct_background"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="注册训练账号"
+            android:textColor="@color/vr_mbct_text_primary"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="完成注册后将自动进入 VR-MBCT 主界面，可继续进行设备连接、课程训练和数据查看。"
+            android:textColor="@color/vr_mbct_text_secondary"
+            android:textSize="14sp" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            app:cardBackgroundColor="@color/vr_mbct_surface"
+            app:cardCornerRadius="26dp"
+            app:cardElevation="0dp"
+            app:strokeColor="@color/vr_mbct_stroke"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="22dp">
+
+                <EditText
+                    android:id="@+id/etFullName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/vr_mbct_button"
+                    android:hint="姓名"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/vr_mbct_text_primary"
+                    android:textColorHint="@color/vr_mbct_text_secondary" />
+
+                <EditText
+                    android:id="@+id/etUsername"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:backgroundTint="@color/vr_mbct_button"
+                    android:hint="账号"
+                    android:inputType="text"
+                    android:textColor="@color/vr_mbct_text_primary"
+                    android:textColorHint="@color/vr_mbct_text_secondary" />
+
+                <EditText
+                    android:id="@+id/etPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:backgroundTint="@color/vr_mbct_button"
+                    android:hint="手机号"
+                    android:inputType="phone"
+                    android:textColor="@color/vr_mbct_text_primary"
+                    android:textColorHint="@color/vr_mbct_text_secondary" />
+
+                <EditText
+                    android:id="@+id/etOrganization"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:backgroundTint="@color/vr_mbct_button"
+                    android:hint="机构 / 科室"
+                    android:inputType="text"
+                    android:textColor="@color/vr_mbct_text_primary"
+                    android:textColorHint="@color/vr_mbct_text_secondary" />
+
+                <EditText
+                    android:id="@+id/etPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:backgroundTint="@color/vr_mbct_button"
+                    android:hint="密码"
+                    android:inputType="textPassword"
+                    android:textColor="@color/vr_mbct_text_primary"
+                    android:textColorHint="@color/vr_mbct_text_secondary" />
+
+                <EditText
+                    android:id="@+id/etConfirmPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:backgroundTint="@color/vr_mbct_button"
+                    android:hint="确认密码"
+                    android:inputType="textPassword"
+                    android:textColor="@color/vr_mbct_text_primary"
+                    android:textColorHint="@color/vr_mbct_text_secondary" />
+
+                <Button
+                    android:id="@+id/btnRegister"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:backgroundTint="@color/vr_mbct_button"
+                    android:text="完成注册"
+                    android:textColor="@color/vr_mbct_white" />
+
+                <Button
+                    android:id="@+id/btnBackToLogin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:backgroundTint="@color/vr_mbct_button_secondary"
+                    android:text="返回登录"
+                    android:textColor="@color/vr_mbct_text_primary" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+</ScrollView>

@@ -58,6 +58,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (BuildConfig.FLAVOR == "vrMbct") {
+            val intent = Intent().setClassName(this, "com.entertech.tes.vr.mode.mbct.MbctLoginActivity")
+            if (intent.resolveActivity(packageManager) != null) {
+                startActivity(intent)
+                finish()
+                return
+            }
+        }
         setContentView(R.layout.activity_main)
         btnOK = findViewById(R.id.btnOK)
         btnDebug = findViewById(R.id.btnDebug)

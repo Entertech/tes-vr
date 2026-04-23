@@ -3,6 +3,21 @@
 
     <application>
         <activity
+            android:name=".mode.mbct.MbctAccountActivity"
+            android:exported="false" />
+        <activity
+            android:name=".mode.mbct.MbctDataCenterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".mode.mbct.MbctHomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".mode.mbct.MbctRegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".mode.mbct.MbctLoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".mode.mbct.MbctCourseListActivity"
             android:exported="false" />
         <activity

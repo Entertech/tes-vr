@@ -12,16 +12,29 @@ object MbctRecordStore {
     private val timestampFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
     private val sessionIdFormat = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault())
 
+    fun getRootDir(context: Context): File {
+        val rootDir = File(context.getExternalFilesDir(null), DIR_NAME)
+        if (!rootDir.exists()) {
+            rootDir.mkdirs()
+        }
+        return rootDir
+    }
+
     fun createSessionId(): String {
         return sessionIdFormat.format(Date())
     }
 
     fun getSessionFile(context: Context, sessionId: String): File {
-        val rootDir = File(context.getExternalFilesDir(null), DIR_NAME)
-        if (!rootDir.exists()) {
-            rootDir.mkdirs()
-        }
+        val rootDir = getRootDir(context)
         return File(rootDir, "mbct_session_$sessionId.jsonl")
+    }
+
+    fun listSessionFiles(context: Context): List<File> {
+        return getRootDir(context)
+            .listFiles()
+            ?.filter { it.isFile && it.name.startsWith("mbct_session_") && it.extension == "jsonl" }
+            ?.sortedByDescending { it.lastModified() }
+            .orEmpty()
     }
 
     fun appendRecord(
