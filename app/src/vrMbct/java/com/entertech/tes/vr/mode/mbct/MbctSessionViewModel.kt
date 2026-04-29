@@ -40,20 +40,32 @@ class MbctSessionViewModel : BaseTesViewModel() {
 
     private val _uiState = MutableStateFlow(MbctSessionUiState())
     val uiState = _uiState.asStateFlow()
+    private val _brainwaveState = MutableStateFlow(
+        MbctBrainwaveUiState(
+            phaseLabel = MbctBrainwavePhase.SESSION_READY.label,
+            latestValue = 0,
+            samples = emptyList()
+        )
+    )
+    val brainwaveState = _brainwaveState.asStateFlow()
 
     private var selectedCourse: MbctCourse? = null
     private var sessionId: String = ""
     private var stimulationJob: Job? = null
     private var postGuideJob: Job? = null
+    private var brainwaveJob: Job? = null
     private var stimulationRunning = false
     private var postGuideStarted = false
     private var hasBoundSession = false
+    private var brainwaveStep = 0
+    private var currentBrainwavePhase = MbctBrainwavePhase.SESSION_READY
 
     fun bindSession(sessionId: String, courseId: String) {
         if (hasBoundSession) {
             return
         }
         hasBoundSession = true
+        startBrainwaveFeedIfNeeded()
         this.sessionId = sessionId
         selectedCourse = MbctCourseCatalog.findById(courseId)
         val filePath = if (sessionId.isEmpty()) {
@@ -84,6 +96,7 @@ class MbctSessionViewModel : BaseTesViewModel() {
         postGuideJob?.cancel()
         stimulationRunning = true
         postGuideStarted = false
+        currentBrainwavePhase = MbctBrainwavePhase.STIMULATION
         _uiState.value = _uiState.value.copy(
             stimulationStatus = "刺激状态：已提交启动请求，课程 ${course.title}",
             postGuideStatus = "末次引导与脑电采集：待执行",
@@ -296,6 +309,7 @@ class MbctSessionViewModel : BaseTesViewModel() {
             return
         }
         postGuideStarted = true
+        currentBrainwavePhase = MbctBrainwavePhase.POST_GUIDE
         appendSessionRecord(
             stage = "post_guide_started",
             payload = mapOf(
@@ -329,6 +343,7 @@ class MbctSessionViewModel : BaseTesViewModel() {
                 delay(SIMULATED_SECOND_DELAY_MS)
             }
             postGuideStarted = false
+            currentBrainwavePhase = MbctBrainwavePhase.SESSION_READY
             _uiState.value = _uiState.value.copy(
                 stimulationStatus = "刺激状态：本次课程流程已完成",
                 sessionStatus = "会话状态：本次 VR-MBCT 已完成，数据已保存，可重新开始模拟",
@@ -369,6 +384,31 @@ class MbctSessionViewModel : BaseTesViewModel() {
         super.onCleared()
         stimulationJob?.cancel()
         postGuideJob?.cancel()
+        brainwaveJob?.cancel()
+    }
+
+    private fun startBrainwaveFeedIfNeeded() {
+        if (brainwaveJob?.isActive == true) {
+            return
+        }
+        brainwaveJob = viewModelScope.launch {
+            while (true) {
+                updateBrainwave(currentBrainwavePhase)
+                delay(MbctBrainwavePhase.SAMPLE_INTERVAL_MS)
+            }
+        }
+    }
+
+    private fun updateBrainwave(phase: MbctBrainwavePhase) {
+        brainwaveStep += 1
+        val value = phase.nextValue(brainwaveStep)
+        val newSamples = (_brainwaveState.value.samples + value)
+            .takeLast(MbctBrainwavePhase.MAX_POINT_COUNT)
+        _brainwaveState.value = MbctBrainwaveUiState(
+            phaseLabel = phase.label,
+            latestValue = value,
+            samples = newSamples
+        )
     }
 
     private fun buildSimulatedStimulationStatus(

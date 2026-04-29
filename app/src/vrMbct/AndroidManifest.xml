@@ -3,6 +3,9 @@
 
     <application>
         <activity
+            android:name=".mode.mbct.MbctDeviceInfoActivity"
+            android:exported="false" />
+        <activity
             android:name=".mode.mbct.MbctAccountActivity"
             android:exported="false" />
         <activity

@@ -4,4 +4,5 @@
     <item name="tvChangeCurrentMode" type="id" />
     <item name="tvPseudoStimulateMode" type="id" />
     <item name="tvNormalMode" type="id" />
+    <item name="btnOpenVrMbctDeviceInfo" type="id" />
 </resources>

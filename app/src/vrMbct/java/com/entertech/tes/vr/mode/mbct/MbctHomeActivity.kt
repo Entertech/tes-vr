@@ -34,6 +34,7 @@ class MbctHomeActivity : AppCompatActivity() {
     private var btnOpenModeCenter: Button? = null
     private var btnOpenDataCenter: Button? = null
     private var btnOpenAccount: Button? = null
+    private var btnOpenDeviceInfo: Button? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +54,7 @@ class MbctHomeActivity : AppCompatActivity() {
         btnOpenModeCenter = findViewById(R.id.btnOpenModeCenter)
         btnOpenDataCenter = findViewById(R.id.btnOpenDataCenter)
         btnOpenAccount = findViewById(R.id.btnOpenAccount)
+        btnOpenDeviceInfo = findViewById(R.id.btnOpenDeviceInfo)
 
         btnConnectAndTrain?.setOnClickListener {
             startActivity(createConnectIntent())
@@ -65,6 +67,9 @@ class MbctHomeActivity : AppCompatActivity() {
         }
         btnOpenAccount?.setOnClickListener {
             startActivity(Intent(this, MbctAccountActivity::class.java))
+        }
+        btnOpenDeviceInfo?.setOnClickListener {
+            startActivity(Intent(this, MbctDeviceInfoActivity::class.java))
         }
     }
 

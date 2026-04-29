@@ -25,10 +25,13 @@ class MbctSessionActivity : BaseTesActivity<MbctSessionViewModel>() {
     private var tvStimulationStatus: TextView? = null
     private var tvPostGuideStatus: TextView? = null
     private var tvCountdown: TextView? = null
+    private var tvBrainwavePhase: TextView? = null
+    private var tvBrainwaveValue: TextView? = null
     private var tvRecordStatus: TextView? = null
     private var tvSessionStatus: TextView? = null
     private var tvDeviceInfo: TextView? = null
     private var tvReceiveMsg: TextView? = null
+    private var brainwaveChartView: MbctBrainwaveChartView? = null
     private var btnStartStimulation: Button? = null
     private var btnStopStimulation: Button? = null
     private var btnCloseSession: Button? = null
@@ -49,10 +52,13 @@ class MbctSessionActivity : BaseTesActivity<MbctSessionViewModel>() {
         tvStimulationStatus = findViewById(R.id.tvStimulationStatus)
         tvPostGuideStatus = findViewById(R.id.tvPostGuideStatus)
         tvCountdown = findViewById(R.id.tvCountdown)
+        tvBrainwavePhase = findViewById(R.id.tvBrainwavePhase)
+        tvBrainwaveValue = findViewById(R.id.tvBrainwaveValue)
         tvRecordStatus = findViewById(R.id.tvRecordStatus)
         tvSessionStatus = findViewById(R.id.tvSessionStatus)
         tvDeviceInfo = findViewById(R.id.tvDeviceInfo)
         tvReceiveMsg = findViewById(R.id.tvReceiveMsg)
+        brainwaveChartView = findViewById(R.id.brainwaveChartView)
         btnStartStimulation = findViewById(R.id.btnStartStimulation)
         btnStopStimulation = findViewById(R.id.btnStopStimulation)
         btnCloseSession = findViewById(R.id.btnCloseSession)
@@ -83,6 +89,14 @@ class MbctSessionActivity : BaseTesActivity<MbctSessionViewModel>() {
                 btnStopStimulation?.isEnabled = state.stopButtonEnabled
                 btnStartStimulation?.alpha = if (state.startButtonEnabled) 1f else 0.5f
                 btnStopStimulation?.alpha = if (state.stopButtonEnabled) 1f else 0.5f
+            }
+        }
+
+        lifecycleScope.launch(Dispatchers.Main) {
+            viewModel.brainwaveState.collect { state ->
+                tvBrainwavePhase?.text = state.phaseLabel
+                tvBrainwaveValue?.text = "实时脑波：${state.latestValue}  （范围 -500 ~ 500）"
+                brainwaveChartView?.submitSamples(state.samples)
             }
         }
 

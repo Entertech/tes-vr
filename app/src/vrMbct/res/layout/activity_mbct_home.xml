@@ -195,6 +195,15 @@
                     android:backgroundTint="@color/vr_mbct_button_secondary"
                     android:text="进入账号中心"
                     android:textColor="@color/vr_mbct_text_primary" />
+
+                <Button
+                    android:id="@+id/btnOpenDeviceInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:backgroundTint="@color/vr_mbct_button_secondary"
+                    android:text="查看设备信息展示页"
+                    android:textColor="@color/vr_mbct_text_primary" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 

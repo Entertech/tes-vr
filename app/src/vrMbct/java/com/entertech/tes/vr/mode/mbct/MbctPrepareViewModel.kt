@@ -29,16 +29,27 @@ class MbctPrepareViewModel : BaseTesViewModel() {
 
     private val _navigationEvent = MutableSharedFlow<String>()
     val navigationEvent = _navigationEvent.asSharedFlow()
+    private val _brainwaveState = MutableStateFlow(
+        MbctBrainwaveUiState(
+            phaseLabel = MbctBrainwavePhase.PREPARE.label,
+            latestValue = 0,
+            samples = emptyList()
+        )
+    )
+    val brainwaveState = _brainwaveState.asStateFlow()
 
     private var prepareJob: Job? = null
+    private var brainwaveJob: Job? = null
     private var hasStarted = false
     private var sessionId: String = ""
+    private var brainwaveStep = 0
 
     fun startPrepareGuideIfNeeded() {
         if (hasStarted) {
             return
         }
         hasStarted = true
+        startBrainwaveFeedIfNeeded()
         sessionId = MbctRecordStore.createSessionId()
         MbctRecordStore.appendRecord(
             context = TesVrApp.instance,
@@ -83,6 +94,31 @@ class MbctPrepareViewModel : BaseTesViewModel() {
     override fun onCleared() {
         super.onCleared()
         prepareJob?.cancel()
+        brainwaveJob?.cancel()
+    }
+
+    private fun startBrainwaveFeedIfNeeded() {
+        if (brainwaveJob?.isActive == true) {
+            return
+        }
+        brainwaveJob = viewModelScope.launch {
+            while (true) {
+                updateBrainwave(MbctBrainwavePhase.PREPARE)
+                delay(MbctBrainwavePhase.SAMPLE_INTERVAL_MS)
+            }
+        }
+    }
+
+    private fun updateBrainwave(phase: MbctBrainwavePhase) {
+        brainwaveStep += 1
+        val value = phase.nextValue(brainwaveStep)
+        val newSamples = (_brainwaveState.value.samples + value)
+            .takeLast(MbctBrainwavePhase.MAX_POINT_COUNT)
+        _brainwaveState.value = MbctBrainwaveUiState(
+            phaseLabel = phase.label,
+            latestValue = value,
+            samples = newSamples
+        )
     }
 
     private fun formatCountdown(totalSeconds: Int): String {

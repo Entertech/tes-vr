@@ -24,8 +24,11 @@ class MbctPrepareActivity : BaseTesActivity<MbctPrepareViewModel>() {
     private var tvProcessHint: TextView? = null
     private var tvGuideStatus: TextView? = null
     private var tvCountdown: TextView? = null
+    private var tvBrainwavePhase: TextView? = null
+    private var tvBrainwaveValue: TextView? = null
     private var tvDeviceInfo: TextView? = null
     private var tvReceiveMsg: TextView? = null
+    private var brainwaveChartView: MbctBrainwaveChartView? = null
     private var btnToggleDevicePanel: Button? = null
     private var lastToggleClickAt: Long = 0L
     private var showDefaultDevicePanel = true
@@ -41,8 +44,11 @@ class MbctPrepareActivity : BaseTesActivity<MbctPrepareViewModel>() {
         tvProcessHint = findViewById(R.id.tvProcessHint)
         tvGuideStatus = findViewById(R.id.tvGuideStatus)
         tvCountdown = findViewById(R.id.tvCountdown)
+        tvBrainwavePhase = findViewById(R.id.tvBrainwavePhase)
+        tvBrainwaveValue = findViewById(R.id.tvBrainwaveValue)
         tvDeviceInfo = findViewById(R.id.tvDeviceInfo)
         tvReceiveMsg = findViewById(R.id.tvReceiveMsg)
+        brainwaveChartView = findViewById(R.id.brainwaveChartView)
         btnToggleDevicePanel = findViewById(R.id.btnToggleDevicePanel)
         btnToggleDevicePanel?.setOnClickListener(this)
         renderDevicePanel()
@@ -57,6 +63,14 @@ class MbctPrepareActivity : BaseTesActivity<MbctPrepareViewModel>() {
                 tvProcessHint?.text = state.processHint
                 tvGuideStatus?.text = state.guideStatus
                 tvCountdown?.text = state.countdownText
+            }
+        }
+
+        lifecycleScope.launch(Dispatchers.Main) {
+            viewModel.brainwaveState.collect { state ->
+                tvBrainwavePhase?.text = state.phaseLabel
+                tvBrainwaveValue?.text = "实时脑波：${state.latestValue}  （范围 -500 ~ 500）"
+                brainwaveChartView?.submitSamples(state.samples)
             }
         }
 
