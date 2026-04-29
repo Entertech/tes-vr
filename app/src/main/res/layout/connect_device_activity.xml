@@ -1,53 +1,196 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="#F6F2EA"
+    android:fillViewport="true"
     tools:context=".connect.ConnectDeviceActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/d16dp"
-        android:layout_marginTop="@dimen/d20dp"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:padding="20dp">
 
-        <Button
-            android:id="@+id/btnConnectDeviceByMac"
-            android:layout_width="wrap_content"
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="通过mac地址连接" />
+            android:text="连接设备"
+            android:textColor="#173D3A"
+            android:textSize="26sp"
+            android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/etDeviceMac"
-            android:layout_width="@dimen/d0dp"
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/d20dp"
-            android:layout_weight="1" />
+            android:layout_marginTop="10dp"
+            android:text="当前页面支持两种连接方式：通过 MAC 地址精确连接，或通过设备名称快速连接。连接成功后可直接进入模式入口页。"
+            android:textColor="#5D6B67"
+            android:textSize="14sp" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            app:cardBackgroundColor="#234843"
+            app:cardCornerRadius="28dp"
+            app:cardElevation="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="22dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="连接状态"
+                    android:textColor="#B8D7D2"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvConnectStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="设备连接状态：待连接"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="如果设备已经连接，可直接进入模式页；如果未连接，请在下方任选一种方式发起连接。"
+                    android:textColor="#D9ECE8"
+                    android:textSize="13sp" />
+
+                <Button
+                    android:id="@+id/btnOpenModeCenter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:backgroundTint="#E7D8BD"
+                    android:text="设备已连接，直接进入模式页"
+                    android:textColor="#173D3A" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            app:cardBackgroundColor="#FFFDF9"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="0dp"
+            app:strokeColor="#D9D2C5"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="方式一：通过 MAC 地址连接"
+                    android:textColor="#173D3A"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="适合已知目标设备地址时使用，连接目标更明确，推荐现场调试和固定设备场景。"
+                    android:textColor="#5D6B67"
+                    android:textSize="13sp" />
+
+                <EditText
+                    android:id="@+id/etDeviceMac"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@android:drawable/edit_text"
+                    android:hint="例如 D4:AD:20:7E:2A:60"
+                    android:inputType="textVisiblePassword"
+                    android:padding="12dp"
+                    android:textColor="#173D3A"
+                    android:textColorHint="#8A938F" />
+
+                <Button
+                    android:id="@+id/btnConnectDeviceByMac"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:backgroundTint="#2E6A63"
+                    android:text="通过 MAC 地址连接"
+                    android:textColor="#FFFFFF" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:layout_marginBottom="20dp"
+            app:cardBackgroundColor="#FFFDF9"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="0dp"
+            app:strokeColor="#D9D2C5"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="方式二：通过设备名称连接"
+                    android:textColor="#173D3A"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="适合只掌握设备名称时快速发起连接，便于演示和批量设备现场识别。"
+                    android:textColor="#5D6B67"
+                    android:textSize="13sp" />
+
+                <EditText
+                    android:id="@+id/etDeviceName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@android:drawable/edit_text"
+                    android:hint="例如 NE-200A2408403"
+                    android:inputType="text"
+                    android:padding="12dp"
+                    android:textColor="#173D3A"
+                    android:textColorHint="#8A938F" />
+
+                <Button
+                    android:id="@+id/btnConnectDeviceByName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:backgroundTint="#D6C4A3"
+                    android:text="通过设备名称连接"
+                    android:textColor="#173D3A" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/d16dp"
-        android:layout_marginTop="@dimen/d20dp"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btnConnectDeviceByName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="通过名字连接" />
-
-        <EditText
-            android:id="@+id/etDeviceName"
-            android:layout_width="@dimen/d0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/d20dp"
-            android:layout_weight="1" />
-    </LinearLayout>
-</LinearLayout>
+</ScrollView>
