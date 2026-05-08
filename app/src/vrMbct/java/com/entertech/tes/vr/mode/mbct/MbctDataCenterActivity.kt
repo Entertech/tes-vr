@@ -20,6 +20,7 @@ class MbctDataCenterActivity : AppCompatActivity() {
     private var tvDataSummary: TextView? = null
     private var tvFileList: TextView? = null
     private var btnRefreshData: Button? = null
+    private var btnOpenReportList: Button? = null
     private var btnOpenFileViewer: Button? = null
     private var btnBackHome: Button? = null
 
@@ -29,11 +30,15 @@ class MbctDataCenterActivity : AppCompatActivity() {
         tvDataSummary = findViewById(R.id.tvDataSummary)
         tvFileList = findViewById(R.id.tvFileList)
         btnRefreshData = findViewById(R.id.btnRefreshData)
+        btnOpenReportList = findViewById(R.id.btnOpenReportList)
         btnOpenFileViewer = findViewById(R.id.btnOpenFileViewer)
         btnBackHome = findViewById(R.id.btnBackHome)
 
         btnRefreshData?.setOnClickListener {
             renderData()
+        }
+        btnOpenReportList?.setOnClickListener {
+            startActivity(Intent(this, MbctReportListActivity::class.java))
         }
         btnOpenFileViewer?.setOnClickListener {
             startActivity(Intent(this, FileListActivity::class.java))
@@ -61,6 +66,8 @@ class MbctDataCenterActivity : AppCompatActivity() {
             append(MbctCourseCatalog.courses.size)
             append("\n最新文件：")
             append(latest?.name ?: "暂无")
+            append("\nMock 报表数：")
+            append(MbctReportMocks.reports.size)
         }
         tvFileList?.text = if (files.isEmpty()) {
             "当前尚无会话记录。完成一次训练后，这里会展示最近生成的 JSONL 数据文件。"

@@ -33,6 +33,7 @@ class MbctHomeActivity : AppCompatActivity() {
     private var btnConnectAndTrain: Button? = null
     private var btnOpenModeCenter: Button? = null
     private var btnOpenDataCenter: Button? = null
+    private var btnOpenReportList: Button? = null
     private var btnOpenAccount: Button? = null
     private var btnOpenDeviceInfo: Button? = null
 
@@ -53,6 +54,7 @@ class MbctHomeActivity : AppCompatActivity() {
         btnConnectAndTrain = findViewById(R.id.btnConnectAndTrain)
         btnOpenModeCenter = findViewById(R.id.btnOpenModeCenter)
         btnOpenDataCenter = findViewById(R.id.btnOpenDataCenter)
+        btnOpenReportList = findViewById(R.id.btnOpenReportList)
         btnOpenAccount = findViewById(R.id.btnOpenAccount)
         btnOpenDeviceInfo = findViewById(R.id.btnOpenDeviceInfo)
 
@@ -64,6 +66,9 @@ class MbctHomeActivity : AppCompatActivity() {
         }
         btnOpenDataCenter?.setOnClickListener {
             startActivity(Intent(this, MbctDataCenterActivity::class.java))
+        }
+        btnOpenReportList?.setOnClickListener {
+            startActivity(Intent(this, MbctReportListActivity::class.java))
         }
         btnOpenAccount?.setOnClickListener {
             startActivity(Intent(this, MbctAccountActivity::class.java))

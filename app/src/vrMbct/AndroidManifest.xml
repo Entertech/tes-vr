@@ -3,6 +3,12 @@
 
     <application>
         <activity
+            android:name=".mode.mbct.MbctReportDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".mode.mbct.MbctReportListActivity"
+            android:exported="false" />
+        <activity
             android:name=".mode.mbct.MbctDeviceInfoActivity"
             android:exported="false" />
         <activity
